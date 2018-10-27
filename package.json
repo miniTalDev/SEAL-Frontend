@@ -1,0 +1,44 @@
+{
+  "name": "frontend-elearning",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "serve -p 8080 -s dist",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "deploy-bluemix": "yarn build && cp manifest.yml dist && cd dist && ibmcloud cf push"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0-rc.1",
+    "axios": "^0.18.0",
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "hls.js": "^0.11.0",
+    "material-design-icons-iconfont": "^3.0.3",
+    "roboto-fontface": "*",
+    "serve": "^10.0.2",
+    "vue": "^2.5.17",
+    "vue-dplayer": "^0.0.10",
+    "vue-router": "^3.0.1",
+    "vue-xgplayer": "^0.4.2",
+    "vuetify": "^1.2.0",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "@vue/eslint-config-standard": "^3.0.5",
+    "vue-cli-plugin-vuetify": "^0.2.1",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
+  "engines": {
+    "node": "10.6.0",
+    "npm": "6.4.1"
+  }
+}
