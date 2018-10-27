@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     loadAllVideoCard: async function () {
-      let videoDetails = await axios.get(process.env.VUE_APP_SUBJECT_SERVICE_URL + `/${this.subjectID}/videos`)
+      let videoDetails = await axios.get(process.env.VUE_APP_VIDEO_SERVICE_URL + `/subject/${this.subjectID}/videos`)
       videoDetails = videoDetails.data
       this.videoDetails = videoDetails
       console.log(this.subjectID)

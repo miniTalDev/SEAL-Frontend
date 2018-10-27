@@ -18,7 +18,6 @@ export default {
   },
   mounted () {
     console.log('Getter Work : ' + this.facultyID)
-    // this.$router.push('faculty/' + this.facultyID)
   },
   props: {},
   data () {

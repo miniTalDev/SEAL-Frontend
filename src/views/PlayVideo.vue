@@ -40,7 +40,7 @@ export default {
   methods: {
     fetchVideoDetail: async function () {
       this.videoID = this.$route.params.videoID
-      let videoDetail = await axios.get(`${process.env.VUE_APP_VIDEO_SERVICE_URL}/${this.videoID}`)
+      let videoDetail = await axios.get(`${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`)
       videoDetail = videoDetail.data
       this.videoDetail = videoDetail
       this.$refs.player.dp.switchVideo({

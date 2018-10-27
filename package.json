@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "serve -p 8080 -s dist",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve --mode development",
+    "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
     "deploy-bluemix": "yarn build && cp manifest.yml dist && cd dist && ibmcloud cf push"
   },
