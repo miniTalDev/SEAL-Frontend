@@ -42,7 +42,7 @@ export default {
   methods: {
     ...mapActions(['setFacultyID']),
     loadAllFaculties: async function () {
-      let faculties = await axios.get(`${process.env.VUE_APP_PROGRAM_SERVICE_URL}/`)
+      let faculties = await axios.get(`${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`)
       faculties = faculties.data
       this.faculties = faculties
     }

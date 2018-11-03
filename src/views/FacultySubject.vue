@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     loadAllSubjectFromFaculty: async function () {
-      let subjectDetails = await axios.get(process.env.VUE_APP_PROGRAM_SERVICE_URL + `/${this.facultyID}/subjects`)
+      let subjectDetails = await axios.get(process.env.VUE_APP_PROGRAM_SERVICE_URL + `/program/${this.facultyID}/subjects`)
       subjectDetails = subjectDetails.data
       console.log(subjectDetails)
       this.subjectDetails = subjectDetails
