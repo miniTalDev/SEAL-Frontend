@@ -2,7 +2,9 @@
     <v-app>
       <ToolBar/>
       <router-view></router-view>
-      <v-footer app></v-footer>
+      <v-footer color="black" app inset>
+        <span class="white--text">&copy; Seal-Learning</span>
+      </v-footer>
     </v-app>
 </template>
 <script>

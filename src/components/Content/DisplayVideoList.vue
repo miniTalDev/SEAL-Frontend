@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
           <v-container grid-list-md >
-            <v-layout row wrap>
+            <v-layout row wrap align-end flexbox>
                 <v-flex v-for="video in videoDetails" :key="video.video_id" xs3 >
                     <router-link :to="`/player/${video.video_id}`" @click="testLoad()">
                       <video-card :imgURL="video.video_thumbnail" :videoID="video.video_id" :videoDate="video.video_date"

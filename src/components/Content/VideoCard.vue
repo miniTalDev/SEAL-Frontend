@@ -4,12 +4,13 @@
       class="mx-auto">
           <v-img
             :src="imgURL"
-            aspect-ratio="2.75"
+            aspect-ratio="2.75" height="150px"
           ></v-img>
           <v-card-text>
-              <h4>{{subjectName}}</h4>
+              <div class="title">{{subjectName}}</div>
+              <hr/>
               <p>{{teacherName}}</p>
-              <p>{{videoDate}}</p>
+              <span class="grey--text">{{videoDate}}</span>
           </v-card-text>
         </v-card>
       </v-hover>

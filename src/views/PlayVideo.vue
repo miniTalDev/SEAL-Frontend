@@ -1,9 +1,8 @@
 <template>
   <v-content>
-      <!-- <h1>{{videoDetail.video_name}}</h1> -->
+      <br/>
       <d-player @play="play" :options="config" ref="player" style="width:54%;margin:auto"></d-player>
-        <!-- <p>{{videoDetail.teacher.teacher_name}}</p>
-        <p>{{videoDetail.video_date}}</p> -->
+      <p>{{videoDetail.video_name}}</p>
   </v-content>
 </template>
 <script>
@@ -32,7 +31,7 @@ export default {
           pic: 'demo.jpg',
           thumbnails: 'thumbnails.jpg'
         },
-        logo: require('../assets/elearn-logo.png')
+        logo: require('../assets/seal-learning.png')
 
       }
     }
