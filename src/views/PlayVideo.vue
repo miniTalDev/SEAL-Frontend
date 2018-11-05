@@ -31,7 +31,7 @@ export default {
           pic: 'demo.jpg',
           thumbnails: 'thumbnails.jpg'
         },
-        logo: require('../assets/seal-learning.png')
+        logo: require('../assets/seal-logo.png')
 
       }
     }
