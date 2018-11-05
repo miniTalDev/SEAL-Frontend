@@ -25,7 +25,7 @@
         <v-list-tile
         v-for="item in items"
           :key="item.title"
-          @click="Page(item.page)" 
+          @click="Page(item.page)"
         >
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
@@ -40,7 +40,7 @@
         <v-list-tile
         v-for="item in favorite"
           :key="item.title"
-          @click="Page(item.page)" 
+          @click="Page(item.page)"
         >
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
@@ -55,7 +55,7 @@
         <v-list-tile
         v-for="item in curriculums"
           :key="item.title"
-          @click="Page(item.page)" 
+          @click="Page(item.page)"
         >
           <v-list-tile-action>
             <v-icon>{{item.icon}}</v-icon>
@@ -105,24 +105,24 @@ export default {
         'Master of Science Program in Information Technology"'
       ],
       items: [
-          { title: 'All Videos', icon: 'videocam' , page: '/' },
-          { title: 'Subject', icon: 'school' , page: '/' }
-        ],
+        { title: 'All Videos', icon: 'videocam', page: '/' },
+        { title: 'Subject', icon: 'school', page: '/' }
+      ],
       favorite: [
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' }
-        ],
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' }
+      ],
       curriculums: [
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' },
-          { title: 'xxxxx', icon: 'favorites' , page: '/' }
-        ]
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' },
+        { title: 'xxxxx', icon: 'favorites', page: '/' }
+      ]
     }
   },
   methods: {
@@ -132,8 +132,8 @@ export default {
       faculties = faculties.data
       this.faculties = faculties
     },
-    Page(page){
-      this.$router.replace({ path: page });
+    Page (page) {
+      this.$router.replace({ path: page })
     }
   }
 }

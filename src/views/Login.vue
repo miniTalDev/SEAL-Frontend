@@ -6,69 +6,75 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-card-text>
-                <img src="https://www.sit.kmutt.ac.th/en/wp-content/uploads/2018/05/logo-flat-blk.png"/>  
+                <img src="https://www.sit.kmutt.ac.th/en/wp-content/uploads/2018/05/logo-flat-blk.png"/>
                 <v-form>
                   <v-text-field prepend-icon="person" name="login" label="Login" type="text"></v-text-field>
                   <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"></v-text-field>
                 </v-form>
               </v-card-text>
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="rgb(163,190,140)">Login</v-btn>
                 <hr/>
-                <v-btn @click="login_facebook()">Facebook</v-btn>
+                <v-btn @click="login_facebook()" color="rgba(59, 89, 152)" style="color:white">Facebook</v-btn>
                 <br/><br/>
             </v-card>
           </v-flex>
         </v-layout>
       </v-container>
   </v-content>
-</v-app>  
+</v-app>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
+import {mapGetters} from 'vuex'
 
 export default {
-  name: "login",
-  data() {
+  name: 'login',
+  data () {
     return {
       profile: {},
       ready: false,
       authorized: false
-    };
+    }
+  },
+  computed: {
+    ...mapGetters(['getUser'])
   },
   methods: {
-    async login_facebook() {
-      await FB.getLoginStatus(function(response) {
-        console.log(response);
+    async login_facebook () {
+      await FB.getLoginStatus(function (response) {
+        console.log(response)
         const api = axios.create({
           headers: {
             access: response
           }
-        });
+        })
         const data = api
-          .post("", {
+          .post('', {
 
           })
-          .then(function(response) {
-            
+          .then(function (response) {
+
           })
-          .catch(function(response) {
-            alert("มีบางอย่าง error !!!");
-          });
-      });
+          .catch(function (response) {
+            alert('มีบางอย่าง error !!!')
+          })
+      })
     }
   },
-  async mounted() {
+  async mounted () {
+    console.log('--- [Login.vue]Get User from Vuex ---')
+    console.log(this.getUser)
     window.fbAsyncInit = () => {
       FB.init({
-        appId: "1910900992326991",
+        appId: '1910900992326991',
         cookie: true,
         xfbml: true,
-        version: "v3.2"
-      });
-    };
+        version: 'v3.2'
+      })
+    }
   }
-};
+}
 </script>
 
 <style>
