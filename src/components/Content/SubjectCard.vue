@@ -7,8 +7,9 @@
             aspect-ratio="2.75"
           ></v-img>
           <v-card-text>
-              <p>{{subjectCode}}</p>
-              <p>{{subjectName}}</p>
+              <span class="title">{{subjectCode}}</span>
+              <br/>
+              <span class="">{{subjectName}}</span>
           </v-card-text>
         </v-card>
       </v-hover>

@@ -1,8 +1,8 @@
 <template>
-  <v-content>
+  <v-app>
     <banner/>
     <display-video-list :facultyID="toString(getFacultyID)" />
-  </v-content>
+  </v-app>
 </template>
 
 <script>

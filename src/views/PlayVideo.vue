@@ -1,9 +1,9 @@
 <template>
-  <v-content>
+  <v-app>
       <br/>
       <d-player @play="play" :options="config" ref="player" style="width:54%;margin:auto"></d-player>
       <p>{{videoDetail.video_name}}</p>
-  </v-content>
+  </v-app>
 </template>
 <script>
 import axios from 'axios'
@@ -31,8 +31,10 @@ export default {
           pic: 'demo.jpg',
           thumbnails: 'thumbnails.jpg'
         },
-        logo: require('../assets/seal-logo.png')
-
+        subtitle: {
+        },
+        logo: require('../assets/seal-logo.png'),
+        theme: 'red',
       }
     }
   },

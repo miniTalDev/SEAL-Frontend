@@ -1,54 +1,77 @@
 <template>
+<v-app>
+  <v-content>
     <v-container fluid>
           <v-container grid-list-md >
-            <v-layout row wrap>
-                <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs3 >
+            <v-layout row wrap align-end flexbox>
+                <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs12 sm4 >
                     <router-link :to="`/subject/${subject.subject_id}`">
                       <subject-card :subjectID="subject.subject_id" :subjectCode="subject.subject_code" :subjectName="subject.subject_name"/>
                     </router-link>
                 </v-flex>
             </v-layout>
           </v-container>
-      </v-container>
+    </v-container>
+  </v-content>
+
+  <v-dialog v-model="dialog" hide-overlay persistent width="300">
+    <v-card color="black" dark>
+        <v-card-text>
+          Loading...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+</v-app>
 </template>
 <script>
-import subjectCard from '../components/Content/SubjectCard.vue'
-import axios from 'axios'
+import subjectCard from "../components/Content/SubjectCard.vue";
+import axios from "axios";
 
 export default {
-  name: 'FacultySubject',
+  name: "FacultySubject",
   components: {
     subjectCard
   },
-  data () {
+  data() {
     return {
       isShowMenu: false,
       subjectDetails: [],
-      facultyID: 1
-    }
+      facultyID: 1,
+      dialog: false
+    };
   },
-  props: {
-
-  },
-  mounted () {
-    this.loadAllSubjectFromFaculty()
+  props: {},
+  mounted() {
+    this.dialog = true;
+    this.loadAllSubjectFromFaculty();
   },
   watch: {
-    '$route.params.facultyID': function (facultyID) {
-      this.facultyID = facultyID
-      this.loadAllSubjectFromFaculty()
+    "$route.params.facultyID": function(facultyID) {
+      this.dialog = true;
+      this.facultyID = facultyID;
+      this.loadAllSubjectFromFaculty();
     }
   },
   methods: {
-    loadAllSubjectFromFaculty: async function () {
-      let subjectDetails = await axios.get(process.env.VUE_APP_PROGRAM_SERVICE_URL + `/program/${this.facultyID}/subjects`)
-      subjectDetails = subjectDetails.data
-      console.log(subjectDetails)
-      this.subjectDetails = subjectDetails
+    loadAllSubjectFromFaculty: async function() {
+      let subjectDetails = await axios.get(
+        process.env.VUE_APP_PROGRAM_SERVICE_URL +
+          `/program/${this.facultyID}/subjects`
+      );
+      subjectDetails = subjectDetails.data;
+      console.log(subjectDetails);
+      this.subjectDetails = subjectDetails;
+      this.dialog = false;
     },
-    fetchSubjectById: function (subjectId) {
-      console.log('Click and Load Subject By ID : ' + subjectId)
+    fetchSubjectById: function(subjectId) {
+      console.log("Click and Load Subject By ID : " + subjectId);
     }
   }
-}
+};
 </script>

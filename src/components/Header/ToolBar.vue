@@ -6,21 +6,16 @@
           <img src="https://ar.sit.kmutt.ac.th/assets/img/logosit.png" height="30px"/>
         </router-link>
         <v-spacer></v-spacer>
-        <b-dropdown id="ddown1" text="Subject By Faculty" class="m-md-2" >
-            <b-dropdown-item v-for="faculty in faculties" :key="faculty.program_id" :to="`/faculty/${faculty.program_id}`" @click="setFacultyID(faculty.program_id)">
-              {{faculty.program_name}}
-            </b-dropdown-item>
-        </b-dropdown>
         <v-btn icon @click.native="dialog = true">
             <v-icon>search</v-icon>
         </v-btn>
         <v-btn fab @click="Page('/login')">
         <v-avatar>
-            <img :src="`${image}`"/>
+            <img :src="`${this.getUser.userImg}`"/>
         </v-avatar>
         </v-btn>
       </v-toolbar>
-      <v-navigation-drawer app fixed dark :clipped="$vuetify.breakpoint.mdAndUp" v-model="drawer">
+      <v-navigation-drawer app fixed dark :clipped="$vuetify.breakpoint.mdAndUp" v-model="drawer" v-bind:width="250">
         <v-list dense>
         <v-list-tile
         v-for="item in items"
@@ -28,7 +23,7 @@
           @click="Page(item.page)"
         >
           <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
+            <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{item.title}}</v-list-tile-title>
@@ -43,7 +38,7 @@
           @click="Page(item.page)"
         >
           <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
+            <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{item.title}}</v-list-tile-title>
@@ -53,15 +48,15 @@
       <v-subheader class="mt-1 grey--text text--darken-1">Curriculums</v-subheader>
       <v-list dense>
         <v-list-tile
-        v-for="item in curriculums"
-          :key="item.title"
-          @click="Page(item.page)"
+        v-for="item in faculties"
+          :key="item.program_id"
+          @click="PageFaculty(item.program_id)"
         >
           <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
+            <v-icon>favorites</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{item.title}}</v-list-tile-title>
+            <v-list-tile-title>{{item.program_name}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -82,7 +77,7 @@
 </template>
 <script>
 import axios from 'axios'
-import { mapActions } from 'vuex'
+import { mapActions,mapGetters } from 'vuex'
 
 export default {
   name: 'ToolBar',
@@ -94,11 +89,13 @@ export default {
   },
   props: {
   },
+  computed: {
+    ...mapGetters(['getUser'])
+  },
   data () {
     return {
-      drawer: false,
+      drawer: true,
       dialog: false,
-      image: 'https://scontent.fbkk2-4.fna.fbcdn.net/v/t1.0-9/30726269_10215071824725078_6112983317628141762_n.jpg?_nc_cat=101&_nc_eui2=AeFegqDiTGYv1Ou0FUAj2uEAJ4F9EoP4AH3OrcsE5BHMbLhha6fB2sTkiagqxj93DPt1NwbE9W-JPe2_dec6iF-ATNlCYkm1m762xeHkLLcI0A&_nc_ht=scontent.fbkk2-4.fna&oh=d1959b535ba861c75e9195914b07b551&oe=5C742742',
       faculties: [
         'Bachelor of Science Program in Information Technology',
         'Bachelor of Science Program in Computer Science',
@@ -109,16 +106,6 @@ export default {
         { title: 'Subject', icon: 'school', page: '/' }
       ],
       favorite: [
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' }
-      ],
-      curriculums: [
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
         { title: 'xxxxx', icon: 'favorites', page: '/' },
         { title: 'xxxxx', icon: 'favorites', page: '/' },
         { title: 'xxxxx', icon: 'favorites', page: '/' }
@@ -134,6 +121,10 @@ export default {
     },
     Page (page) {
       this.$router.replace({ path: page })
+    },
+    PageFaculty (program_id) {
+      this.$router.replace({ path: '/faculty/'+program_id })
+      this.setFacultyID(program_id);
     }
   }
 }
