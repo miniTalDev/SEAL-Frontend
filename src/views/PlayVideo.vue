@@ -11,15 +11,16 @@
                 <p class="video-name">{{videoDetail.video_name}}</p>
                 <p class="descript-video">
                   <v-icon class="icon-description">person</v-icon>
-                  {{videoDetail.teacher.teacher_name}}
+                  <!-- {{videoDetail.teacher.teacher_name}} fdsfsd -->
+                  {{videoDetail.teacherName}}
                 </p>
                 <p class="descript-video">
                   <v-icon class="icon-description">access_time</v-icon>
-                  {{videoDetail.video_date}}
+                  {{videoDetail.videoDate}}
                 </p>
                 <p class="descript-video">
                   <v-icon class="icon-description">location_on</v-icon>
-                  Classroom: {{videoDetail.room.room_name}}
+                  {{videoDetail.roomName}}
                 </p>
               </div>
             </div>
@@ -50,7 +51,12 @@ export default {
   data () {
     return {
       videoID: 0,
-      videoDetail: {},
+      videoDetail: {
+        teacherName: '',
+        videoDate: '',
+        roomName: '',
+        videoUrl: ''
+      },
       config: {
         screenshot: true,
         video: {
@@ -58,10 +64,12 @@ export default {
           thumbnails: 'thumbnails.jpg'
         },
         subtitle: {
+          
         },
         logo: require('../assets/seal-logo.png'),
         theme: 'red'
-      }
+      },
+      
     }
   },
   methods: {
@@ -69,9 +77,12 @@ export default {
       this.videoID = this.$route.params.videoID
       let videoDetail = await axios.get(`${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`)
       videoDetail = videoDetail.data
-      this.videoDetail = videoDetail
+      this.videoDetail.teacherName = videoDetail.teacher.teacher_name
+      this.videoDetail.videoDate = videoDetail.video_date
+      this.videoDetail.roomName = videoDetail.room.room_name
+      this.videoDetail.videoUrl = videoDetail.player.hls_url
       this.$refs.player.dp.switchVideo({
-        url: this.videoDetail.player.hls_url
+        url: this.videoDetail.videoUrl
       })
     },
     play () {
