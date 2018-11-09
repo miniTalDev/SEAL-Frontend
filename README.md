@@ -1,8 +1,10 @@
-SEAL-Frontend
-Start App with : 1.yarn  2. yarn serve (dev mode) 3. yarn deploy-bluemix (production)
-เมื่อใช้คำสั่งของ Dev mode ระบบจะทำการนำ .env.development มาใช้เองโดยอัตโนมัติ 
-ในขณะเดียวกันถ้าใช้ Production ระบบจะทำการ build Vue ออกมาเป็น static และ deploy ขึ้น ibm cloud เองอัตโนมัติทันที
-ซึ่งจะนำ .env.production มาใช้งานให้เองอัตโนมัติ  
+## SEAL-Frontend
 
-###################
-เช็คดูการทำงานเสลา Build/ Run โปรแกรมได้ที่ package.json
+**Start App with**
+1. ``` yarn install ```
+2. ``` yarn serve ``` for use develop mode
+3. ``` yarn deploy-bluemix ``` for deploy to production
+
+คำสั่งของ Develop Mode ระบบจะทำการนำ ``` .env.development ``` มาใช้งาน
+
+คำสั่งของ Production ระบบจะทำการ Build Vue ออกมาเป็น static และ deploy ขึ้น ibm cloud เองอัตโนมัติทันที ซึ่งจะนำ ``` .env.production ``` มาใช้งาน
