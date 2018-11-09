@@ -6,7 +6,7 @@ Vue.use(Router)
 
 // เมื่อใช้ route mode history เพื่อลบ # ออกจาก URL ต้องอย่าลืม config บน Server เช่นกัน
 // ด้วยไม่อย่างนั้นนอาจจะมีปัญหา ซึ่งดูได้จากเว็บ Vue-Router : HTML5 History Mode
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -64,3 +64,11 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('router protection : ')
+  console.log(to)
+  next()
+})
+
+export default router
