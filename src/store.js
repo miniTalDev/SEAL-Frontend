@@ -14,17 +14,25 @@ export default new Vuex.Store({
       programName: 'Bachelor of Science Program in Information Technology',
       programCode: 'B.Sc.IT',
       role: 'ROLE_USER'
-    }
+    },
+    keyword: ''
   },
   actions: {
     setFacultyID: function ({ commit }, facultyID) {
       commit('setFacultyID', facultyID)
+    },
+    setKeyword: function({ commit }, keyword) {
+      commit('setKeyword', keyword)
     }
   },
   mutations: {
     setFacultyID: function (state, facultyID) {
       console.log(facultyID)
       state.facultyID = facultyID
+    },
+    setKeyword: function (state, keyword) {
+      console.log(keyword)
+      state.keyword = keyword
     }
   },
   getters: {
@@ -33,6 +41,9 @@ export default new Vuex.Store({
     },
     getUser: function (state) {
       return state.user
+    },
+    getKeyword: function (state) {
+      return state.keyword
     }
   }
 })

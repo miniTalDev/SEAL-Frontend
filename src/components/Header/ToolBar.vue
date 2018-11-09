@@ -68,7 +68,7 @@
           class="headline grey lighten-2"
           primary-title
         >
-          <v-text-field prepend-icon="search" placeholder="ลองหาวีดีโอดูสิ~"></v-text-field>
+          <v-text-field prepend-icon="search" placeholder="ลองหาวีดีโอดูสิ~" v-model="searchKeyword" @keyup.enter="Search(searchKeyword)"></v-text-field>
         </v-card-title>
       </v-card>
     </v-dialog>
@@ -94,6 +94,7 @@ export default {
   },
   data () {
     return {
+      searchKeyword: '',
       drawer: true,
       dialog: false,
       faculties: [
@@ -114,6 +115,7 @@ export default {
   },
   methods: {
     ...mapActions(['setFacultyID']),
+    ...mapActions(['setKeyword']),
     loadAllFaculties: async function () {
       let faculties = await axios.get(`${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`)
       faculties = faculties.data
@@ -123,8 +125,13 @@ export default {
       this.$router.replace({ path: page })
     },
     PageFaculty (program_id) {
-      this.$router.replace({ path: '/faculty/' + program_id })
-      this.setFacultyID(program_id)
+      this.$router.replace({ path: '/faculty/'+program_id })
+      this.setFacultyID(program_id);
+    },
+    Search(searchKeyword) {
+      this.$router.replace({ path: '/faculty/1/'+searchKeyword})
+      this.setKeyword(searchKeyword);
+      this.dialog =false;
     }
   }
 }
