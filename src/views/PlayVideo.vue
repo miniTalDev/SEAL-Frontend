@@ -94,7 +94,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .over-scroll {
   overflow-y: scroll;
 }
