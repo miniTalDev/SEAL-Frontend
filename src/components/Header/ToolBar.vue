@@ -126,8 +126,8 @@ export default {
       this.$router.replace({ path: page })
     },
     PageFaculty (program_id) {
-      this.$router.replace({ path: '/faculty/'+program_id })
-      this.setFacultyID(program_id);
+      this.$router.replace({ path: '/faculty/' + program_id })
+      this.setFacultyID(program_id)
     },
     Search(searchKeyword) {
 

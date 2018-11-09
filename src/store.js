@@ -21,7 +21,7 @@ export default new Vuex.Store({
     setFacultyID: function ({ commit }, facultyID) {
       commit('setFacultyID', facultyID)
     },
-    setKeyword: function({ commit }, keyword) {
+    setKeyword: function ({ commit }, keyword) {
       commit('setKeyword', keyword)
     }
   },

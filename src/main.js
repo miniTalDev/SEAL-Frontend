@@ -1,6 +1,7 @@
 import '@babel/polyfill'
 import Vue from 'vue'
 import './plugins/vuetify'
+import jwt_decode from 'jwt-decode'
 import App from './App.vue'
 import router from './router'
 import store from './store'

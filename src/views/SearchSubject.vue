@@ -30,36 +30,36 @@
 </v-app>
 </template>
 <script>
-import subjectCard from "../components/Content/SubjectCard.vue";
-import axios from "axios";
-import { mapGetters, mapActions } from 'vuex';
+import subjectCard from '../components/Content/SubjectCard.vue'
+import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: "SearchSubject",
+  name: 'SearchSubject',
   components: {
     subjectCard
   },
-  data() {
+  data () {
     return {
       isShowMenu: false,
       subjectDetails: [],
       facultyID: 1,
       dialog: false,
-      keyword:''
-    };
+      keyword: ''
+    }
   },
   props: {},
-  mounted() {
-    this.dialog = true;
-    this.loadSubjectsByKeyword();
+  mounted () {
+    this.dialog = true
+    this.loadSubjectsByKeyword()
   },
   watch: {
-      "$route.params.keyword": function(keyword) {
-        // console.log(keyword)
-        console.log('watch param keyword')
-      this.dialog = true;
-      //this.keyword = keyword;
-      this.loadSubjectsByKeyword();
+    '$route.params.keyword': function (keyword) {
+      // console.log(keyword)
+      console.log('watch param keyword')
+      this.dialog = true
+      // this.keyword = keyword;
+      this.loadSubjectsByKeyword()
     }
   },
   methods: {
@@ -79,9 +79,9 @@ export default {
     //   this.setKeyword(null);
       this.dialog = false;
     },
-    fetchSubjectById: function(subjectId) {
-      console.log("Click and Load Subject By ID : " + subjectId);
+    fetchSubjectById: function (subjectId) {
+      console.log('Click and Load Subject By ID : ' + subjectId)
     }
   }
-};
+}
 </script>

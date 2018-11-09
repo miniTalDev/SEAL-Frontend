@@ -69,7 +69,7 @@ export default {
       console.log('----------------------------')
       let id = this.username
       let password = this.password
-      let userAuthentication = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/user/login', 
+      let userAuthentication = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/user/login',
         {
           id,
           password
