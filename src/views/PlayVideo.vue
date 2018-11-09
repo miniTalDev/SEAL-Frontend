@@ -25,114 +25,126 @@
             </div>
           </div>
           <div class="col-4">
-            
+            <div class="row">
+              <div class="col-12">
+                <video-suggest class="suggestion"/>
+              </div>
+            </div>
           </div>
         </div>
       </div>
   </v-app>
 </template>
 <script>
-import axios from 'axios'
-import VueDPlayer from 'vue-dplayer'
-import 'vue-dplayer/dist/vue-dplayer.css'
+import axios from "axios";
+import VueDPlayer from "vue-dplayer";
+import "vue-dplayer/dist/vue-dplayer.css";
+import DisplayVideoListSuggest from "../components/Content/DisplayVideoCardSuggest.vue";
 
 export default {
-  name: 'PlayVideo',
-  mounted () {
-    this.fetchVideoDetail()
+  name: "PlayVideo",
+  mounted() {
+    this.fetchVideoDetail();
   },
   components: {
-    'd-player': VueDPlayer
+    "d-player": VueDPlayer,
+    "video-suggest": DisplayVideoListSuggest
   },
-  props: {
-
-  },
-  data () {
+  props: {},
+  data() {
     return {
       videoID: 0,
       videoDetail: {},
       config: {
         screenshot: true,
         video: {
-          pic: 'demo.jpg',
-          thumbnails: 'thumbnails.jpg'
+          pic: "demo.jpg",
+          thumbnails: "thumbnails.jpg"
         },
-        subtitle: {
-        },
-        logo: require('../assets/seal-logo.png'),
-        theme: 'red'
+        subtitle: {},
+        logo: require("../assets/seal-logo.png"),
+        theme: "red"
       }
-    }
+    };
   },
   methods: {
-    fetchVideoDetail: async function () {
-      this.videoID = this.$route.params.videoID
-      let videoDetail = await axios.get(`${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`)
-      videoDetail = videoDetail.data
-      this.videoDetail = videoDetail
+    fetchVideoDetail: async function() {
+      this.videoID = this.$route.params.videoID;
+      let videoDetail = await axios.get(
+        `${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`
+      );
+      videoDetail = videoDetail.data;
+      this.videoDetail = videoDetail;
       this.$refs.player.dp.switchVideo({
         url: this.videoDetail.player.hls_url
-      })
+      });
     },
-    play () {
-    }
+    play() {}
   }
-}
+};
 </script>
 
 <style>
-  .over-scroll {
-    overflow-y: scroll;
-  }
+.over-scroll {
+  overflow-y: scroll;
+}
 
-  .video-player {
-    width: 100%;
-    height: 550px;
-    margin-top: 80px;
-    margin-bottom: 20px;
-  }
+.video-player {
+  width: 100%;
+  height: 550px;
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
 
-  .video-name {
-    text-align: left;
-    font-size: 25px;
-    color: #ffffff;
-    font-weight: 500;
-  }
+.video-name {
+  text-align: left;
+  font-size: 25px;
+  color: #ffffff;
+  font-weight: 500;
+}
 
-  .icon-description {
-    color: #ffffff !important;
-    margin-right: 10px;
-  }
+.icon-description {
+  color: #ffffff !important;
+  margin-right: 10px;
+}
 
-  .descript-video {
-    font-size: 16px;
-    text-align: left;
-    color: #ffffff;
-  }
+.descript-video {
+  font-size: 16px;
+  text-align: left;
+  color: #ffffff;
+}
 
-  .comment-section {
-    margin-bottom: 50px;
-  }
+.comment-section {
+  margin-bottom: 50px;
+}
 
-  .count-comment {
-    font-size: 18px;
-    font-weight: 500;
-    text-decoration: underline;
-    color: #ffffff;
-    text-align: left;
-  }
+.count-comment {
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: underline;
+  color: #ffffff;
+  text-align: left;
+}
 
-  .comment-img {
-    border-radius: 50px;
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    color: #ffffff;
-  }
+.comment-img {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  color: #ffffff;
+}
 
-  .comment-field {
-    background-color: #191919;
-    color: #ffffff;
-    font-size: 16px;
-  }
+.comment-field {
+  background-color: #191919;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.suggestion {
+  width: 100%;
+  padding: 0px !important;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
 </style>
