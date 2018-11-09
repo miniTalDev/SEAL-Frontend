@@ -1,20 +1,25 @@
 <template>
-      <v-hover>
-        <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`"
-      class="mx-auto">
-          <v-img
+  <v-hover>
+    <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" class="mx-auto card-size">
+      <div class="row">
+        <div class="col-12">
+          <v-img class="thumbnail"
             :src="imgURL"
             aspect-ratio="2.75"
           ></v-img>
-          <v-card-text>
-              <span class="title">{{subjectName}}</span>
-              <hr/>
-              <span class="body-1">{{teacherName}}</span>
-              <br/>
-              <span class="grey--text body-1">{{videoDate}}</span>
-          </v-card-text>
-        </v-card>
-      </v-hover>
+        </div>
+      </div>
+      <div class="row description-block">
+        <div class="col-12 text-left">
+          <span class="subject-name">{{subjectName}}</span>
+        </div>
+        <div class="col-12 text-left space-top-teacher-name">
+          <v-icon>person</v-icon>
+          <span class="description-text">{{teacherName}}</span>
+        </div>
+      </div>
+    </v-card>
+  </v-hover>
 </template>
 
 <script>
@@ -44,3 +49,37 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .card-size {
+    width: auto;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: 150px;
+  }
+
+  .description-block {
+    margin: 15px 2px;
+  }
+
+  .subject-name {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .space-top-teacher-name {
+    margin-top: 10px;
+  }
+
+  .description-text {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 200;
+  }
+</style>
+
