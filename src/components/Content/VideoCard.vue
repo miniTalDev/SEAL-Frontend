@@ -14,7 +14,7 @@
           <span class="subject-name">{{subjectName}}</span>
         </div>
         <div class="col-12 text-left space-top-teacher-name">
-          <v-icon>person</v-icon>
+          <v-icon class="icon">person</v-icon>
           <span class="description-text">{{teacherName}}</span>
         </div>
       </div>
@@ -56,6 +56,8 @@ export default {
     height: 260px;
     overflow: hidden;
     border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #303030;
   }
 
   .thumbnail {
@@ -70,6 +72,7 @@ export default {
   .subject-name {
     font-size: 14px;
     font-weight: 500;
+    color: #fff;
   }
 
   .space-top-teacher-name {
@@ -80,6 +83,11 @@ export default {
     margin-left: 10px;
     font-size: 12px;
     font-weight: 200;
+    color: #fff;
+  }
+
+  .icon {
+    color: #fff;
   }
 </style>
 
