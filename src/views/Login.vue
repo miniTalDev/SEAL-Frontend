@@ -8,11 +8,11 @@
               <v-card-text>
                 <img src="https://www.sit.kmutt.ac.th/en/wp-content/uploads/2018/05/logo-flat-blk.png"/>
                 <v-form>
-                  <v-text-field prepend-icon="person" name="login" label="Login" type="text"></v-text-field>
-                  <v-text-field prepend-icon="lock" name="password" label="Password" id="password" type="password"></v-text-field>
+                  <v-text-field v-model="username" prepend-icon="person" name="login" label="Login" type="text" ></v-text-field>
+                  <v-text-field v-model="password" prepend-icon="lock" name="password" label="Password" id="password" type="password"></v-text-field>
                 </v-form>
               </v-card-text>
-                <v-btn color="rgb(163,190,140)">Login</v-btn>
+                <v-btn color="rgb(163,190,140)" @click="loginAuthen()">Login</v-btn>
                 <hr/>
                 <v-btn @click="login_facebook()" color="rgba(59, 89, 152)" style="color:white">Facebook</v-btn>
                 <br/><br/>
@@ -26,7 +26,7 @@
 
 <script>
 import axios from 'axios'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'login',
@@ -34,7 +34,9 @@ export default {
     return {
       profile: {},
       ready: false,
-      authorized: false
+      authorized: false,
+      username: '',
+      password: ''
     }
   },
   computed: {
@@ -60,6 +62,19 @@ export default {
             alert('มีบางอย่าง error !!!')
           })
       })
+    },
+    loginAuthen: async function () {
+      console.log(this.username)
+      console.log(process.env.VUE_APP_USER_SERVICE_URL)
+      console.log('----------------------------')
+      let id = this.username
+      let password = this.password
+      let userAuthentication = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/user/login', 
+        {
+          id,
+          password
+        }
+      )
     }
   },
   async mounted () {

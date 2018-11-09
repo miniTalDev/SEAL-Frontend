@@ -25,49 +25,49 @@
         </v-card-text>
       </v-card>
   </v-dialog>
-    
+
 </v-content>
 </template>
 <script>
-import VideoCard from "./VideoCard";
-import axios from "axios";
+import VideoCard from './VideoCard'
+import axios from 'axios'
 
 export default {
-  name: "DisplayVideoList",
+  name: 'DisplayVideoList',
   components: {
     VideoCard
   },
-  mounted() {
+  mounted () {
     this.subjectID =
       this.$route.params.subjectID === undefined
         ? 2
-        : this.$route.params.subjectID;
-    this.loadAllVideoCard();
+        : this.$route.params.subjectID
+    this.loadAllVideoCard()
   },
   props: {},
-  data() {
+  data () {
     return {
       dialog: true,
       isShowMenu: false,
       videoDetails: [],
       videoUrlSample:
-        "https://ngelearning.sit.kmutt.ac.th/api/v0/subject/2/videos",
+        'https://ngelearning.sit.kmutt.ac.th/api/v0/subject/2/videos',
       subjectID: 2
-    };
+    }
   },
   methods: {
-    loadAllVideoCard: async function() {
+    loadAllVideoCard: async function () {
       let videoDetails = await axios.get(
         process.env.VUE_APP_VIDEO_SERVICE_URL +
           `/subject/${this.subjectID}/videos`
-      );
-      videoDetails = videoDetails.data;
-      this.videoDetails = videoDetails;
-      console.log(this.subjectID);
-      this.dialog = false;
+      )
+      videoDetails = videoDetails.data
+      this.videoDetails = videoDetails
+      console.log(this.subjectID)
+      this.dialog = false
     },
-    fetchVideoById: function(videoId) {},
-    testLoad: function() {}
+    fetchVideoById: function (videoId) {},
+    testLoad: function () {}
   }
-};
+}
 </script>

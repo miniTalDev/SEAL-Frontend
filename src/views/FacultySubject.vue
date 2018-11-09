@@ -30,48 +30,48 @@
 </v-app>
 </template>
 <script>
-import subjectCard from "../components/Content/SubjectCard.vue";
-import axios from "axios";
+import subjectCard from '../components/Content/SubjectCard.vue'
+import axios from 'axios'
 
 export default {
-  name: "FacultySubject",
+  name: 'FacultySubject',
   components: {
     subjectCard
   },
-  data() {
+  data () {
     return {
       isShowMenu: false,
       subjectDetails: [],
       facultyID: 1,
       dialog: false
-    };
+    }
   },
   props: {},
-  mounted() {
-    this.dialog = true;
-    this.loadAllSubjectFromFaculty();
+  mounted () {
+    this.dialog = true
+    this.loadAllSubjectFromFaculty()
   },
   watch: {
-    "$route.params.facultyID": function(facultyID) {
-      this.dialog = true;
-      this.facultyID = facultyID;
-      this.loadAllSubjectFromFaculty();
+    '$route.params.facultyID': function (facultyID) {
+      this.dialog = true
+      this.facultyID = facultyID
+      this.loadAllSubjectFromFaculty()
     }
   },
   methods: {
-    loadAllSubjectFromFaculty: async function() {
+    loadAllSubjectFromFaculty: async function () {
       let subjectDetails = await axios.get(
         process.env.VUE_APP_PROGRAM_SERVICE_URL +
           `/program/${this.facultyID}/subjects`
-      );
-      subjectDetails = subjectDetails.data;
-      console.log(subjectDetails);
-      this.subjectDetails = subjectDetails;
-      this.dialog = false;
+      )
+      subjectDetails = subjectDetails.data
+      console.log(subjectDetails)
+      this.subjectDetails = subjectDetails
+      this.dialog = false
     },
-    fetchSubjectById: function(subjectId) {
-      console.log("Click and Load Subject By ID : " + subjectId);
+    fetchSubjectById: function (subjectId) {
+      console.log('Click and Load Subject By ID : ' + subjectId)
     }
   }
-};
+}
 </script>

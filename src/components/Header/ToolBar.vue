@@ -77,7 +77,7 @@
 </template>
 <script>
 import axios from 'axios'
-import { mapActions,mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'ToolBar',
@@ -123,8 +123,8 @@ export default {
       this.$router.replace({ path: page })
     },
     PageFaculty (program_id) {
-      this.$router.replace({ path: '/faculty/'+program_id })
-      this.setFacultyID(program_id);
+      this.$router.replace({ path: '/faculty/' + program_id })
+      this.setFacultyID(program_id)
     }
   }
 }

@@ -34,7 +34,7 @@ export default {
         subtitle: {
         },
         logo: require('../assets/seal-logo.png'),
-        theme: 'red',
+        theme: 'red'
       }
     }
   },
