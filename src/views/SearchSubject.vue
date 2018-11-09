@@ -2,7 +2,7 @@
 <v-app>
   <v-content>
     <v-container fluid>
-          <v-container grid-list-md >
+          <v-container grid-list-md class="space-top">
             <v-layout row wrap align-end flexbox>
                 <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs12 sm4 >
                     <router-link :to="`/subject/${subject.subject_id}`">
@@ -85,3 +85,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .space-top {
+    margin-top: 60px;
+  }
+</style>
+
