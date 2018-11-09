@@ -2,15 +2,15 @@
 <v-app>
   <v-content>
     <v-container fluid>
-          <v-container grid-list-md >
-            <v-layout row wrap align-end flexbox>
-                <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs12 sm4 >
-                    <router-link :to="`/subject/${subject.subject_id}`">
-                      <subject-card :subjectID="subject.subject_id" :subjectCode="subject.subject_code" :subjectName="subject.subject_name"/>
-                    </router-link>
-                </v-flex>
-            </v-layout>
-          </v-container>
+      <v-container grid-list-md >
+        <v-layout row wrap align-end flexbox>
+            <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs12 sm3 >
+                <router-link :to="`/subject/${subject.subject_id}`">
+                  <subject-card :subjectID="subject.subject_id" :subjectCode="subject.subject_code" :subjectName="subject.subject_name"/>
+                </router-link>
+            </v-flex>
+        </v-layout>
+      </v-container>
     </v-container>
   </v-content>
 
