@@ -64,13 +64,14 @@ export default {
   },
   methods: {
     ...mapGetters(['getKeyword']),
+    ...mapGetters(['getFacultyID']),
     loadSubjectsByKeyword: async function() {
       console.log("load subject by keyword" +this.keyword)
-      this.keyword = this.getKeyword();
+      this.getKeyword();
       console.log("after pim do somthing"+this.keyword)
       let subjectDetails = await axios.get(
         process.env.VUE_APP_PROGRAM_SERVICE_URL +
-          `/program/1/subjects?find=${this.keyword}`
+          `/program/${this.getFacultyID()}/subjects?find=${this.getKeyword()}`
       );
       subjectDetails = subjectDetails.data;
       console.log(subjectDetails);

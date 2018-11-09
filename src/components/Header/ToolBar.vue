@@ -116,6 +116,7 @@ export default {
   methods: {
     ...mapActions(['setFacultyID']),
     ...mapActions(['setKeyword']),
+    ...mapGetters(['getFacultyID']),
     loadAllFaculties: async function () {
       let faculties = await axios.get(`${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`)
       faculties = faculties.data
@@ -129,7 +130,8 @@ export default {
       this.setFacultyID(program_id);
     },
     Search(searchKeyword) {
-      this.$router.replace({ path: '/faculty/1/'+searchKeyword})
+
+      this.$router.replace({ path: '/faculty/'+this.getFacultyID()+'/'+searchKeyword})
       this.setKeyword(searchKeyword);
       this.dialog =false;
     }

@@ -32,6 +32,7 @@
 <script>
 import subjectCard from '../components/Content/SubjectCard.vue'
 import axios from 'axios'
+import { mapActions } from 'vuex';
 
 export default {
   name: 'FacultySubject',
@@ -59,12 +60,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setFacultyID']),
     loadAllSubjectFromFaculty: async function () {
       let subjectDetails = await axios.get(
         process.env.VUE_APP_PROGRAM_SERVICE_URL +
           `/program/${this.facultyID}/subjects`
       )
       subjectDetails = subjectDetails.data
+      this.setFacultyID(this.facultyID)
       console.log(subjectDetails)
       this.subjectDetails = subjectDetails
       this.dialog = false
