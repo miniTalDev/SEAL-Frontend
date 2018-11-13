@@ -78,6 +78,7 @@
 </template>
 <script>
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -86,6 +87,7 @@ export default {
 
   },
   mounted () {
+    this.loadUserDetail()
     this.loadAllFaculties()
   },
   props: {
@@ -108,16 +110,23 @@ export default {
         { title: 'Subject', icon: 'school', page: '/' }
       ],
       favorite: [
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' },
-        { title: 'xxxxx', icon: 'favorites', page: '/' }
+        { title: 'Pivotal Gemfire', icon: 'favorites', page: '/' },
+        { title: 'Microservice With Spring Boot', icon: 'favorites', page: '/' },
+        { title: 'VueJS zero to hero', icon: 'favorites', page: '/' }
       ]
     }
   },
   methods: {
-    ...mapActions(['setFacultyID']),
-    ...mapActions(['setKeyword']),
+    ...mapActions(['setFacultyID','setKeyword','setUser']),
     ...mapGetters(['getFacultyID']),
+    loadUserDetail: function () {
+      let jwtToken = localStorage.getItem('jwtToken')
+      if (jwtToken != null) {
+        this.alreadyLogin = true
+        console.log(jwtDecode(jwtToken))
+        this.setUser(jwtDecode(jwtToken))
+      }
+    },
     loadAllFaculties: async function () {
       let faculties = await axios.get(`${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`)
       faculties = faculties.data

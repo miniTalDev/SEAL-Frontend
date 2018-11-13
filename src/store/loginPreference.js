@@ -9,6 +9,7 @@ export const loginPreference = {
   },
   mutations: {
     setIsShowToolBar: function (state, isShowToolBar) {
+      console.log('Set Tool Bar Is Work !!!')
       state.isShowToolBar = isShowToolBar
     }
   },

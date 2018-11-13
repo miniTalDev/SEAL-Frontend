@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-
 Vue.use(Router)
-
 // เมื่อใช้ route mode history เพื่อลบ # ออกจาก URL ต้องอย่าลืม config บน Server เช่นกัน
 // ด้วยไม่อย่างนั้นนอาจจะมีปัญหา ซึ่งดูได้จากเว็บ Vue-Router : HTML5 History Mode
 let router = new Router({
@@ -66,18 +64,11 @@ let router = new Router({
 })
 
 // router.beforeEach((to, from, next) => {
-//   console.log('router protection : ' + localStorage.getItem('jwtToken'))
-//   var jwtDecode = require('jwt-decode')
-//   console.log('After Decode ' + jwtDecode(localStorage.getItem('jwtToken')))
-//   console.log(to)
-//   if (localStorage.getItem('jwtToken') != null) {
-//     console.log('login pass')
-//     next()
-//   } else {
-//     next({
-//       path: '/login'
-//     })
+//   let jwtToken = localStorage.getItem('jwtToken')
+//   if (jwtToken != null) {
+//     this.userDetailJWT.setJwtToken(jwtDecode(jwtToken))
 //   }
+//   next()
 // })
 
 export default router

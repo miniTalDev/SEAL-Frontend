@@ -3,12 +3,12 @@
       <ToolBar v-show="getIsShowToolBar" />
       <router-view></router-view>
       <v-footer color="black" app inset>
-        <span class="white--text">&copy; Seal-Learning</span>
+        <span class="white--text">&copy; Seal-Learning X VueJS</span>
       </v-footer>
     </v-app>
 </template>
 <script>
-import ToolBar from "./components/Header/ToolBar"
+import ToolBar from './components/Header/ToolBar'
 import {mapGetters} from 'vuex'
 export default {
   name: "App",

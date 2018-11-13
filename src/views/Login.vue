@@ -4,7 +4,8 @@
     <v-container fluid fill-height class="login">
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
-          <v-card class="login-block">
+          <!-- Display login for person who don't login yet. -->
+          <v-card v-if="alreadyLogin == false" class="login-block">
             <v-card-text>
               <img class="logo-img" src="https://www.sit.kmutt.ac.th/en/wp-content/uploads/2018/05/logo-flat-blk.png"/>
               <v-form>
@@ -14,8 +15,17 @@
             </v-card-text>
               <v-btn color="rgb(163,190,140)" @click="loginAuthen()">Login</v-btn>
               <hr/>
-              <v-btn @click="login_facebook()" color="rgba(59, 89, 152)" style="color:white">Facebook</v-btn>
-              <br/><br/>
+          </v-card>
+          <!-- Detail for person who already login-->
+          <v-card v-else class="login-block">
+            <v-card-text>
+              <img class="logo-img" src="https://www.sit.kmutt.ac.th/en/wp-content/uploads/2018/05/logo-flat-blk.png"/>
+              <h1>Profile Detail : {{getUser.userName}} {{getUser.userId}}</h1>
+            </v-card-text>
+              <router-link to="/" >
+                <v-btn color="rgb(163,190,140)" @click="setIsShowToolBar(true)">Back To Homepage</v-btn>
+              </router-link>
+              <hr/>
           </v-card>
         </v-flex>
       </v-layout>
@@ -25,6 +35,7 @@
 
 <script>
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -32,7 +43,7 @@ export default {
   data () {
     return {
       profile: {},
-      ready: false,
+      alreadyLogin: false,
       authorized: false,
       username: '',
       password: ''
@@ -41,28 +52,19 @@ export default {
   computed: {
     ...mapGetters(['getUser', 'getJwtToken', 'getUser'])
   },
+  mounted () {
+    this.setIsShowToolBar(false)
+    console.log('--- [Login.vue]Get User from Vuex ---')
+    console.log(this.getUser)
+    let jwtToken = localStorage.getItem('jwtToken')
+    if (jwtToken != null) {
+      this.alreadyLogin = true
+      console.log(jwtDecode(jwtToken))
+      this.setUser(jwtDecode(jwtToken))
+    }
+  },
   methods: {
     ...mapActions(['setJwtToken', 'setUser','setIsShowToolBar']),
-    async login_facebook () {
-      await FB.getLoginStatus(function (response) {
-        console.log(response)
-        const api = axios.create({
-          headers: {
-            access: response
-          }
-        })
-        const data = api
-          .post('', {
-
-          })
-          .then(function (response) {
-
-          })
-          .catch(function (response) {
-            alert('มีบางอย่าง error !!!')
-          })
-      })
-    },
     loginAuthen: async function () {
       let id = this.username
       let password = this.password
@@ -73,28 +75,14 @@ export default {
         }
       )
       userAuthentication = userAuthentication.data
-      this.setJwtToken(userAuthentication.jwtToken)
       localStorage.setItem('jwtToken', this.getJwtToken)
-      console.log('Get From local Stroage : ' + localStorage.getItem('jwtToken'))
       if (localStorage.getItem('jwtToken') != null) {
+        console.log(userAuthentication.user)
         this.setIsShowToolBar(true)
+        this.setJwtToken(userAuthentication.jwtToken)
+        this.setUser(userAuthentication.user)
         this.$router.push('/')
       }
-      console.log(userAuthentication.user)
-      this.setUser(userAuthentication.user)
-    }
-  },
-  mounted () {
-    this.setIsShowToolBar(false)
-    console.log('--- [Login.vue]Get User from Vuex ---')
-    console.log(this.getUser)
-    window.fbAsyncInit = () => {
-      FB.init({
-        appId: '1910900992326991',
-        cookie: true,
-        xfbml: true,
-        version: 'v3.2'
-      })
     }
   }
 }
