@@ -51,15 +51,12 @@ export default new Vuex.Store({
       state.facultyID = facultyID
     },
     setKeyword: function (state, keyword) {
-      console.log(keyword)
       state.keyword = keyword
     },
     setJwtToken: function (state, jwtToken) {
-      console.log('mutation work :' + jwtToken)
       state.jwtToken = jwtToken
     },
     setUser: function (state, user) {
-      console.log('mutation work :' + user)
       state.user = user
     }
   },

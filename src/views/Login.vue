@@ -19,7 +19,7 @@
           </v-card>
         </v-flex>
       </v-layout>
-    </v-container>  
+    </v-container>
   </v-app>
 </template>
 
@@ -64,9 +64,6 @@ export default {
       })
     },
     loginAuthen: async function () {
-      console.log(this.username)
-      console.log(process.env.VUE_APP_USER_SERVICE_URL)
-      console.log('----------------------------')
       let id = this.username
       let password = this.password
       let userAuthentication = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/user/login',
@@ -80,6 +77,9 @@ export default {
       console.log(this.getJwtToken)
       localStorage.setItem('jwtToken', this.getJwtToken)
       console.log('Get From local Stroage : ' + localStorage.getItem('jwtToken'))
+      if (localStorage.getItem('jwtToken') != null) {
+        this.$router.push('/')
+      }
       console.log(userAuthentication.user)
       this.setUser(userAuthentication.user)
     }

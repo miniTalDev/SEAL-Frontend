@@ -29,9 +29,9 @@
 
 <script>
 export default {
-  name: "VideoCardSuggest",
+  name: 'VideoCardSuggest',
   components: {},
-  mounted() {},
+  mounted () {},
   props: {
     imgURL: String,
     teacherName: String,
@@ -39,14 +39,14 @@ export default {
     videoDate: String,
     videoID: String
   },
-  data() {
+  data () {
     return {
       reviews: 413,
       value: 4.5
-    };
+    }
   },
   methods: {}
-};
+}
 </script>
 
 <style>
@@ -76,4 +76,3 @@ export default {
 		margin-bottom: 20px;
 	}
 </style>
-

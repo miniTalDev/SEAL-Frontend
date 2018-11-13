@@ -37,27 +37,27 @@
   </v-app>
 </template>
 <script>
-import axios from "axios";
-import VueDPlayer from "vue-dplayer";
-import "vue-dplayer/dist/vue-dplayer.css";
-import DisplayVideoListSuggest from "../components/Content/DisplayVideoCardSuggest.vue";
+import axios from 'axios'
+import VueDPlayer from 'vue-dplayer'
+import 'vue-dplayer/dist/vue-dplayer.css'
+import DisplayVideoListSuggest from '../components/Content/DisplayVideoCardSuggest.vue'
 
 export default {
   name: 'PlayVideo',
   mounted () {
     if (localStorage.getItem('jwtToken') == null) {
-        console.log('login fail !!!')
-        this.$router.push({ path: '/login' }) 
-      }else{
-    this.fetchVideoDetail()
-      }
+      console.log('login fail !!!')
+      this.$router.push({ path: '/login' })
+    } else {
+      this.fetchVideoDetail()
+    }
   },
   components: {
-    "d-player": VueDPlayer,
-    "video-suggest": DisplayVideoListSuggest
+    'd-player': VueDPlayer,
+    'video-suggest': DisplayVideoListSuggest
   },
   props: {},
-  data() {
+  data () {
     return {
       videoID: 0,
       videoDetail: {
@@ -69,8 +69,8 @@ export default {
       config: {
         screenshot: true,
         video: {
-          pic: "demo.jpg",
-          thumbnails: "thumbnails.jpg"
+          pic: 'demo.jpg',
+          thumbnails: 'thumbnails.jpg'
         },
         subtitle: {
 
@@ -94,9 +94,9 @@ export default {
         url: this.videoDetail.videoUrl
       })
     },
-    play() {}
+    play () {}
   }
-};
+}
 </script>
 
 <style scoped>
