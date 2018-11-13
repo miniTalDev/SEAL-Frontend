@@ -25,6 +25,7 @@
               <router-link to="/" >
                 <v-btn color="rgb(163,190,140)" @click="setIsShowToolBar(true)">Back To Homepage</v-btn>
               </router-link>
+              <v-btn color="rgb(163,190,140)" @click="logout()">Logout</v-btn>
               <hr/>
           </v-card>
         </v-flex>
@@ -83,6 +84,10 @@ export default {
         this.setUser(userAuthentication.user)
         this.$router.push('/')
       }
+    },
+    logout: function (){
+      localStorage.removeItem('jwtToken')
+      this.alreadyLogin = false
     }
   }
 }
