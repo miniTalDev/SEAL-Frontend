@@ -32,7 +32,7 @@
 <script>
 import subjectCard from '../components/Content/SubjectCard.vue'
 import axios from 'axios'
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 
 export default {
   name: 'FacultySubject',
@@ -50,7 +50,13 @@ export default {
   props: {},
   mounted () {
     this.dialog = true
-    this.loadAllSubjectFromFaculty()
+    console.log('router protection : ' + localStorage.getItem('jwtToken'))
+    if (localStorage.getItem('jwtToken') == null) {
+      console.log('login fail !!!')
+      this.$router.push({ path: '/login' })
+    } else {
+      this.loadAllSubjectFromFaculty()
+    }
   },
   watch: {
     '$route.params.facultyID': function (facultyID) {

@@ -65,19 +65,19 @@ export default {
   methods: {
     ...mapGetters(['getKeyword']),
     ...mapGetters(['getFacultyID']),
-    loadSubjectsByKeyword: async function() {
-      console.log("load subject by keyword" +this.keyword)
-      this.getKeyword();
-      console.log("after pim do somthing"+this.keyword)
+    loadSubjectsByKeyword: async function () {
+      console.log('load subject by keyword' + this.keyword)
+      this.getKeyword()
+      console.log('after pim do somthing' + this.keyword)
       let subjectDetails = await axios.get(
         process.env.VUE_APP_PROGRAM_SERVICE_URL +
           `/program/${this.getFacultyID()}/subjects?find=${this.getKeyword()}`
-      );
-      subjectDetails = subjectDetails.data;
-      console.log(subjectDetails);
-      this.subjectDetails = subjectDetails;
-    //   this.setKeyword(null);
-      this.dialog = false;
+      )
+      subjectDetails = subjectDetails.data
+      console.log(subjectDetails)
+      this.subjectDetails = subjectDetails
+      //   this.setKeyword(null);
+      this.dialog = false
     },
     fetchSubjectById: function (subjectId) {
       console.log('Click and Load Subject By ID : ' + subjectId)

@@ -25,7 +25,7 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'login',
@@ -39,9 +39,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUser'])
+    ...mapGetters(['getUser', 'getJwtToken', 'getUser'])
   },
   methods: {
+    ...mapActions(['setJwtToken', 'setUser']),
     async login_facebook () {
       await FB.getLoginStatus(function (response) {
         console.log(response)
@@ -74,6 +75,13 @@ export default {
           password
         }
       )
+      userAuthentication = userAuthentication.data
+      this.setJwtToken(userAuthentication.jwtToken)
+      console.log(this.getJwtToken)
+      localStorage.setItem('jwtToken', this.getJwtToken)
+      console.log('Get From local Stroage : ' + localStorage.getItem('jwtToken'))
+      console.log(userAuthentication.user)
+      this.setUser(userAuthentication.user)
     }
   },
   async mounted () {

@@ -43,9 +43,14 @@ import "vue-dplayer/dist/vue-dplayer.css";
 import DisplayVideoListSuggest from "../components/Content/DisplayVideoCardSuggest.vue";
 
 export default {
-  name: "PlayVideo",
-  mounted() {
-    this.fetchVideoDetail();
+  name: 'PlayVideo',
+  mounted () {
+    if (localStorage.getItem('jwtToken') == null) {
+        console.log('login fail !!!')
+        this.$router.push({ path: '/login' }) 
+      }else{
+    this.fetchVideoDetail()
+      }
   },
   components: {
     "d-player": VueDPlayer,
@@ -68,12 +73,12 @@ export default {
           thumbnails: "thumbnails.jpg"
         },
         subtitle: {
-          
+
         },
         logo: require('../assets/seal-logo.png'),
         theme: 'red'
-      },
-      
+      }
+
     }
   },
   methods: {

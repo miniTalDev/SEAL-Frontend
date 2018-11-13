@@ -65,10 +65,19 @@ let router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  console.log('router protection : ')
-  console.log(to)
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   console.log('router protection : ' + localStorage.getItem('jwtToken'))
+//   var jwtDecode = require('jwt-decode')
+//   console.log('After Decode ' + jwtDecode(localStorage.getItem('jwtToken')))
+//   console.log(to)
+//   if (localStorage.getItem('jwtToken') != null) {
+//     console.log('login pass')
+//     next()
+//   } else {
+//     next({
+//       path: '/login'
+//     })
+//   }
+// })
 
 export default router

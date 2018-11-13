@@ -6,10 +6,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     facultyID: 0,
+    jwtToken: '',
     user: {
       userId: '59130500097',
       userName: 'Au',
-      userImg: 'https://scontent.fbkk2-4.fna.fbcdn.net/v/t1.0-9/30726269_10215071824725078_6112983317628141762_n.jpg?_nc_cat=101&_nc_eui2=AeFegqDiTGYv1Ou0FUAj2uEAJ4F9EoP4AH3OrcsE5BHMbLhha6fB2sTkiagqxj93DPt1NwbE9W-JPe2_dec6iF-ATNlCYkm1m762xeHkLLcI0A&_nc_ht=scontent.fbkk2-4.fna&oh=d1959b535ba861c75e9195914b07b551&oe=5C742742',
+      userImg: 'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/256x256/plain/user.png',
       facultyID: 1,
       programName: 'Bachelor of Science Program in Information Technology',
       programCode: 'B.Sc.IT',
@@ -18,11 +19,30 @@ export default new Vuex.Store({
     keyword: ''
   },
   actions: {
+    isLoginAuthentication: function () {
+    },
     setFacultyID: function ({ commit }, facultyID) {
       commit('setFacultyID', facultyID)
     },
     setKeyword: function ({ commit }, keyword) {
       commit('setKeyword', keyword)
+    },
+    setJwtToken: function ({ commit }, jwtToken) {
+      console.log('action work : ' + jwtToken)
+      commit('setJwtToken', jwtToken)
+    },
+    setUser: function ({ commit }, user) {
+      console.log('Action work :' + user)
+      let temptUser = {
+        userId: user.id,
+        userName: user.firstname,
+        userImg: user.image,
+        facultyID: 1,
+        programName: user.faculty,
+        programCode: user.faculty,
+        role: 'ROLE_USER'
+      }
+      commit('setUser', temptUser)
     }
   },
   mutations: {
@@ -33,6 +53,14 @@ export default new Vuex.Store({
     setKeyword: function (state, keyword) {
       console.log(keyword)
       state.keyword = keyword
+    },
+    setJwtToken: function (state, jwtToken) {
+      console.log('mutation work :' + jwtToken)
+      state.jwtToken = jwtToken
+    },
+    setUser: function (state, user) {
+      console.log('mutation work :' + user)
+      state.user = user
     }
   },
   getters: {
@@ -44,6 +72,9 @@ export default new Vuex.Store({
     },
     getKeyword: function (state) {
       return state.keyword
+    },
+    getJwtToken: function (state) {
+      return state.jwtToken
     }
   }
 })

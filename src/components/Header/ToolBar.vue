@@ -129,11 +129,10 @@ export default {
       this.$router.replace({ path: '/faculty/' + program_id })
       this.setFacultyID(program_id)
     },
-    Search(searchKeyword) {
-
-      this.$router.replace({ path: '/faculty/'+this.getFacultyID()+'/'+searchKeyword})
-      this.setKeyword(searchKeyword);
-      this.dialog =false;
+    Search (searchKeyword) {
+      this.$router.replace({ path: '/faculty/' + this.getFacultyID() + '/' + searchKeyword })
+      this.setKeyword(searchKeyword)
+      this.dialog = false
     }
   }
 }

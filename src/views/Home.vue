@@ -18,6 +18,11 @@ export default {
   },
   mounted () {
     console.log('Getter Work : ' + this.facultyID)
+    console.log('router protection : ' + localStorage.getItem('jwtToken'))
+    if (localStorage.getItem('jwtToken') == null) {
+      console.log('login fail !!!')
+      this.$router.push({ path: '/login' })
+    }
   },
   props: {},
   data () {
