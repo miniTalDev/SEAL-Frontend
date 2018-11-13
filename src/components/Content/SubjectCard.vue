@@ -18,12 +18,8 @@
 <script>
 export default {
   name: 'SubjectCard',
-  components: {
-
-  },
-  mounted () {
-
-  },
+  components: {},
+  mounted () {},
   props: {
     imgURL: String,
     subjectName: String,
@@ -36,23 +32,21 @@ export default {
       value: 4.5
     }
   },
-  methods: {
-
-  }
+  methods: {}
 }
 </script>
 
 <style scoped>
-  .subject-card {
-    width: auto;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
+.subject-card {
+  width: auto;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 
-  .thumbnail {
-    width: 100%;
-    height: 110px;
-  }
+.thumbnail {
+  width: 100%;
+  height: 110px;
+}
 </style>

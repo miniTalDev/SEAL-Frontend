@@ -99,13 +99,10 @@ export default {
 }
 </script>
 
-<style>
-  .v-navigation-drawer, .v-toolbar, .v-footer {
-    display: none;
-  }
-</style>
-
 <style scoped>
+  /* .v-navigation-drawer, .v-toolbar, .v-footer {
+    display: none;
+  } */
   #background {
     background-image: url("https://scontent.fbkk6-2.fna.fbcdn.net/v/t1.0-9/23844857_10155288832968789_8091596763212753375_n.jpg?_nc_cat=106&_nc_eui2=AeHyGuSX8hHWQacYDXKfUsobwJMBvCSdItX1D8Ts_Y42CbXFJhQaYSTIs59HjOh5svKrP9hr-FauQw2OPCI288gC7Op93DpB1P6Np98wAVBMZQ&_nc_ht=scontent.fbkk6-2.fna&oh=0f563d4bc2aa5a3e965282d4dda9bc96&oe=5C781663");
     background-size: 100%;

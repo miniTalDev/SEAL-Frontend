@@ -8,29 +8,24 @@
     </v-app>
 </template>
 <script>
-import ToolBar from './components/Header/ToolBar'
+import ToolBar from "./components/Header/ToolBar";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     ToolBar
   },
-  mounted () {
-
-  },
+  mounted() {},
   props: {
     msg: String
   },
-  data () {
+  data() {
     return {
       isShowMenu: false
-
-    }
+    };
   },
-  methods: {
-
-  }
-}
+  methods: {}
+};
 </script>
 <style>
 a {

@@ -50,29 +50,29 @@ export default {
 </script>
 
 <style>
-	.card-color {
-		background-color: #191919 !important;
-	}
+.card-color {
+  background-color: #191919 !important;
+}
 
-	.thumbnail-suggest {
-		width: 150px !important;
-		height: 100px !important;
-		margin: 0px;
-	}
+.thumbnail-suggest {
+  width: 150px !important;
+  height: 100px !important;
+  margin: 0px;
+}
 
-	.subject-name {
-		font-size: 16px;
-		font-weight: 300;
-		color: #fff;
-	}
+.subject-name {
+  font-size: 16px;
+  font-weight: 300;
+  color: #fff;
+}
 
-	.description-suggest-video-text{
-		font-size: 12px;
-		font-weight: 200;
-		color: #fff;
-	}
+.description-suggest-video-text {
+  font-size: 12px;
+  font-weight: 200;
+  color: #fff;
+}
 
-	.space-of-suggest {
-		margin-bottom: 20px;
-	}
+.space-of-suggest {
+  margin-bottom: 20px;
+}
 </style>
