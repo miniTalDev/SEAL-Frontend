@@ -42,7 +42,7 @@ export default {
     ...mapGetters(['getUser', 'getJwtToken', 'getUser'])
   },
   methods: {
-    ...mapActions(['setJwtToken', 'setUser']),
+    ...mapActions(['setJwtToken', 'setUser','setIsShowToolBar']),
     async login_facebook () {
       await FB.getLoginStatus(function (response) {
         console.log(response)
@@ -74,17 +74,18 @@ export default {
       )
       userAuthentication = userAuthentication.data
       this.setJwtToken(userAuthentication.jwtToken)
-      console.log(this.getJwtToken)
       localStorage.setItem('jwtToken', this.getJwtToken)
       console.log('Get From local Stroage : ' + localStorage.getItem('jwtToken'))
       if (localStorage.getItem('jwtToken') != null) {
+        this.setIsShowToolBar(true)
         this.$router.push('/')
       }
       console.log(userAuthentication.user)
       this.setUser(userAuthentication.user)
     }
   },
-  async mounted () {
+  mounted () {
+    this.setIsShowToolBar(false)
     console.log('--- [Login.vue]Get User from Vuex ---')
     console.log(this.getUser)
     window.fbAsyncInit = () => {

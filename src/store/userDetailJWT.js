@@ -1,6 +1,5 @@
 export const userDetailJWT = {
   state: {
-    facultyID: 0,
     jwtToken: '',
     user: {
       userId: '59130500097',

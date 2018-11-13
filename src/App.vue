@@ -1,6 +1,6 @@
 <template>
     <v-app>
-      <ToolBar/>
+      <ToolBar v-show="getIsShowToolBar" />
       <router-view></router-view>
       <v-footer color="black" app inset>
         <span class="white--text">&copy; Seal-Learning</span>
@@ -8,23 +8,26 @@
     </v-app>
 </template>
 <script>
-import ToolBar from "./components/Header/ToolBar";
-
+import ToolBar from "./components/Header/ToolBar"
+import {mapGetters} from 'vuex'
 export default {
   name: "App",
   components: {
     ToolBar
   },
-  mounted() {},
+  mounted() {
+
+  },
   props: {
     msg: String
   },
   data() {
     return {
-      isShowMenu: false
     };
   },
-  methods: {}
+  computed: {
+    ...mapGetters(['getIsShowToolBar'])
+  }
 };
 </script>
 <style>
