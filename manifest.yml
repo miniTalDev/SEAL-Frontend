@@ -2,5 +2,9 @@ applications:
 - name: elearning-frontend
   #random-route: true
   memory:  256M
-  path: .
-  buildpack: staticfile_buildpack
+  path: dist/
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  env:
+    lnwza: supakornhahaha
+
+  

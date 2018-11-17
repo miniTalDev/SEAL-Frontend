@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
-    "deploy-bluemix": "yarn build && cp manifest.yml dist/ && cd dist && ibmcloud cf push"
+    "deploy-bluemix": "yarn build && ibmcloud cf push"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-rc.1",
