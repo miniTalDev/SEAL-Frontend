@@ -54,6 +54,7 @@ export default {
     ...mapGetters(['getUser', 'getJwtToken', 'getUser'])
   },
   mounted () {
+    this.setIsShowToolBar(false)
     this.verifyIsLoginByJwtYet()
     console.log('--- [Login.vue]Get User from Vuex ---')
     console.log(this.getUser)
