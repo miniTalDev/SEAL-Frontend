@@ -54,7 +54,6 @@ export default {
     ...mapGetters(['getUser', 'getJwtToken', 'getUser'])
   },
   mounted () {
-    this.setIsShowToolBar(false)
     this.verifyIsLoginByJwtYet()
     console.log('--- [Login.vue]Get User from Vuex ---')
     console.log(this.getUser)
@@ -78,11 +77,12 @@ export default {
       )
       userAuthentication = userAuthentication.data
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
-      if (jwtTokenLocalStorage == null) {
+      if (userAuthentication != null) {
         console.log('login ครั้งแรก')
-        console.log(userAuthentication)
-        this.setJwtToken(userAuthentication.jwtToken)
         localStorage.setItem('jwtToken', userAuthentication.jwtToken)
+        let userAfterDecodeJWT = jwtDecode(userAuthentication.jwtToken).user
+        this.setJwtToken(userAuthentication.jwtToken)
+        this.setUser(userAfterDecodeJWT)
         this.setIsShowToolBar(true)
         this.$router.push('/')
       }
