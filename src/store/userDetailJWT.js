@@ -13,15 +13,13 @@ export const userDetailJWT = {
   },
   actions: {
     setJwtToken: function ({ commit }, jwtToken) {
-      console.log('action work : ' + jwtToken)
       commit('setJwtToken', jwtToken)
     },
     setUser: function ({ commit }, user) {
-      console.log('Action work :' + user)
       let temptUser = {
-        userId: user.id,
-        userName: user.firstname,
-        userImg: user.image,
+        userId: user.userId,
+        userName: user.userName,
+        userImg: user.userImg,
         facultyID: 1,
         programName: user.faculty,
         programCode: user.faculty,

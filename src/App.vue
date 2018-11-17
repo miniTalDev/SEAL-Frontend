@@ -9,26 +9,26 @@
 </template>
 <script>
 import ToolBar from './components/Header/ToolBar'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
-  name: "App",
+  name: 'App',
   components: {
     ToolBar
   },
-  mounted() {
+  mounted () {
 
   },
   props: {
     msg: String
   },
-  data() {
+  data () {
     return {
-    };
+    }
   },
   computed: {
     ...mapGetters(['getIsShowToolBar'])
   }
-};
+}
 </script>
 <style>
 a {

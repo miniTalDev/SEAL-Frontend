@@ -48,11 +48,7 @@
         </v-list>
         <v-subheader class="mt-1 grey--text text--darken-1">Curriculums</v-subheader>
         <v-list dense>
-          <v-list-tile
-          v-for="item in faculties"
-            :key="item.program_id"
-            @click="PageFaculty(item.program_id)"
-          >
+          <v-list-tile v-for="item in faculties" :key="item.program_id" @click="PageFaculty(item.program_id)">
             <v-list-tile-action>
               <v-icon>favorites</v-icon>
             </v-list-tile-action>
@@ -117,14 +113,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setFacultyID','setKeyword','setUser']),
+    ...mapActions(['setFacultyID', 'setKeyword', 'setUser']),
     ...mapGetters(['getFacultyID']),
     loadUserDetail: function () {
       let jwtToken = localStorage.getItem('jwtToken')
       if (jwtToken != null) {
         this.alreadyLogin = true
-        console.log(jwtDecode(jwtToken))
-        this.setUser(jwtDecode(jwtToken))
+        let user = jwtDecode(jwtToken).user
+        console.log(user)
+        this.setUser(user)
       }
     },
     loadAllFaculties: async function () {

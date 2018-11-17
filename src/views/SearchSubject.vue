@@ -63,8 +63,7 @@ export default {
     }
   },
   methods: {
-    ...mapGetters(['getKeyword']),
-    ...mapGetters(['getFacultyID']),
+    ...mapGetters(['getKeyword', 'getFacultyID']),
     loadSubjectsByKeyword: async function () {
       console.log('load subject by keyword' + this.keyword)
       this.getKeyword()

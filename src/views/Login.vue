@@ -55,17 +55,18 @@ export default {
   },
   mounted () {
     this.setIsShowToolBar(false)
+    this.verifyIsLoginByJwtYet()
     console.log('--- [Login.vue]Get User from Vuex ---')
     console.log(this.getUser)
-    let jwtToken = localStorage.getItem('jwtToken')
-    if (jwtToken != null) {
-      this.alreadyLogin = true
-      console.log(jwtDecode(jwtToken))
-      this.setUser(jwtDecode(jwtToken))
-    }
   },
   methods: {
     ...mapActions(['setJwtToken', 'setUser','setIsShowToolBar']),
+    verifyIsLoginByJwtYet: function () {
+      let jwtToken = localStorage.getItem('jwtToken')
+      if (jwtToken != null) {
+        this.alreadyLogin = true
+      }
+    },
     loginAuthen: async function () {
       let id = this.username
       let password = this.password
@@ -76,12 +77,13 @@ export default {
         }
       )
       userAuthentication = userAuthentication.data
-      localStorage.setItem('jwtToken', this.getJwtToken)
-      if (localStorage.getItem('jwtToken') != null) {
-        console.log(userAuthentication.user)
-        this.setIsShowToolBar(true)
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
+      if (jwtTokenLocalStorage == null) {
+        console.log('login ครั้งแรก')
+        console.log(userAuthentication)
         this.setJwtToken(userAuthentication.jwtToken)
-        this.setUser(userAuthentication.user)
+        localStorage.setItem('jwtToken', userAuthentication.jwtToken)
+        this.setIsShowToolBar(true)
         this.$router.push('/')
       }
     },
@@ -120,3 +122,4 @@ export default {
     width: 80%;
   }
 </style>
+
