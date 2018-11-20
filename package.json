@@ -5,6 +5,7 @@
   "scripts": {
     "start": "serve -p 8080 -s dist",
     "serve": "vue-cli-service serve --mode development",
+    "production": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
     "deploy-bluemix": "yarn build && ibmcloud cf push"

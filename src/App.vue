@@ -3,7 +3,8 @@
       <ToolBar v-show="getIsShowToolBar" />
       <router-view></router-view>
       <v-footer color="black" app inset>
-        <span class="white--text">&copy; Seal-Learning X VueJS</span>
+        <span class="white--text">
+          &copy; Seal-Learning X VueJS</span>
       </v-footer>
     </v-app>
 </template>
@@ -16,7 +17,8 @@ export default {
     ToolBar
   },
   mounted () {
-
+    console.log(process.env.VUE_APP_TEST)
+    console.log(process.env.lnwza)
   },
   props: {
     msg: String

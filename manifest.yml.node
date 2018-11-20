@@ -2,8 +2,8 @@ applications:
 - name: elearning-frontend
   #random-route: true
   memory:  256M
-  path: dist/
-  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  command: yarn production
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
   env:
     lnwza: linjingyun12
     VUE_APP_TEST: EvanYou
