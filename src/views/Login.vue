@@ -25,6 +25,7 @@
               <router-link to="/" >
                 <v-btn color="rgb(163,190,140)" @click="setIsShowToolBar(true)">Back To Homepage</v-btn>
               </router-link>
+                <v-btn color="rgb(163,190,140)" @click="verifyJWT()">Send JWT To Verify</v-btn>
               <v-btn color="rgb(163,190,140)" @click="logout()">Logout</v-btn>
               <hr/>
           </v-card>
@@ -91,6 +92,24 @@ export default {
     logout: function (){
       localStorage.removeItem('jwtToken')
       this.alreadyLogin = false
+    },
+    verifyJWT: async function(){
+      let verifyData = await axios.get('http://localhost:3006/users', {
+        headers: {
+          Authorization: localStorage.getItem('jwtToken')
+        }
+      })
+      verifyData = verifyData
+      console.log(verifyData)
+      if(verifyData == undefined){
+        console.log(' un defined time out fuq')
+      }
+      else if(verifyData == null){
+        console.log('null')
+      }
+      else{
+        console.log('value got it')
+      }
     }
   }
 }
