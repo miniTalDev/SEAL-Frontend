@@ -8,4 +8,5 @@ logs
 .next
 dist/
 manifest.yml
-.env.*
+.env.development
+.env.production
