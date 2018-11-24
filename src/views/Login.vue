@@ -91,11 +91,15 @@ export default {
       this.alreadyLogin = false
     },
     verifyJWT: async function(){
-      let verifyData = await axios.get(process.env.VUE_APP_USER_SERVICE_URL + '/users', {
-        headers: {
-          Authorization: localStorage.getItem('jwtToken')
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
+      let verifyData = await axios.get(
+        `${process.env.VUE_APP_USER_SERVICE_URL}/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtTokenLocalStorage}`
+          }
         }
-      })
+      )
       verifyData = verifyData
       console.log(verifyData)
       if(verifyData == undefined){
