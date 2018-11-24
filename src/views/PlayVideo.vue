@@ -83,8 +83,16 @@ export default {
   },
   methods: {
     fetchVideoDetail: async function () {
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       this.videoID = this.$route.params.videoID
-      let videoDetail = await axios.get(`${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`)
+      let videoDetail = await axios.get(
+        `${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtTokenLocalStorage}`
+          }
+        }
+      )
       videoDetail = videoDetail.data
       this.videoDetail.teacherName = videoDetail.teacher.teacher_name
       this.videoDetail.videoDate = videoDetail.video_date

@@ -125,7 +125,15 @@ export default {
       }
     },
     loadAllFaculties: async function () {
-      let faculties = await axios.get(`${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`)
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
+      let faculties = await axios.get(
+        `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtTokenLocalStorage}`
+          }
+        }
+      )
       faculties = faculties.data
       this.faculties = faculties
     },

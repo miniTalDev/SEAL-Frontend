@@ -55,10 +55,8 @@ export default {
   },
   watch: {
     '$route.params.keyword': function (keyword) {
-      // console.log(keyword)
       console.log('watch param keyword')
       this.dialog = true
-      // this.keyword = keyword;
       this.loadSubjectsByKeyword()
     }
   },
@@ -68,14 +66,18 @@ export default {
       console.log('load subject by keyword' + this.keyword)
       this.getKeyword()
       console.log('after pim do somthing' + this.keyword)
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       let subjectDetails = await axios.get(
-        process.env.VUE_APP_PROGRAM_SERVICE_URL +
-          `/program/${this.getFacultyID()}/subjects?find=${this.getKeyword()}`
+        `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/program/${this.getFacultyID()}/subjects?find=${this.getKeyword()}`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtTokenLocalStorage}`
+          }
+        }
       )
       subjectDetails = subjectDetails.data
       console.log(subjectDetails)
       this.subjectDetails = subjectDetails
-      //   this.setKeyword(null);
       this.dialog = false
     },
     fetchSubjectById: function (subjectId) {
