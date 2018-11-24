@@ -68,9 +68,14 @@ export default {
   methods: {
     ...mapActions(['setFacultyID']),
     loadAllSubjectFromFaculty: async function () {
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       let subjectDetails = await axios.get(
-        process.env.VUE_APP_PROGRAM_SERVICE_URL +
-          `/program/${this.facultyID}/subjects`
+        `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/program/${this.facultyID}/subjects`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtTokenLocalStorage}`
+          }
+        }
       )
       subjectDetails = subjectDetails.data
       this.setFacultyID(this.facultyID)
