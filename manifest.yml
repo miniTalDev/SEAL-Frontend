@@ -7,5 +7,4 @@ applications:
   env:
     lnwza: linjingyun12
     VUE_APP_TEST: EvanYou
-
-  
+    
