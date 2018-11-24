@@ -57,8 +57,6 @@ export default {
   mounted () {
     this.setIsShowToolBar(false)
     this.verifyIsLoginByJwtYet()
-    console.log('--- [Login.vue]Get User from Vuex ---')
-    console.log(this.getUser)
   },
   methods: {
     ...mapActions(['setJwtToken', 'setUser','setIsShowToolBar']),
@@ -80,7 +78,6 @@ export default {
       userAuthentication = userAuthentication.data
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       if (userAuthentication != null) {
-        console.log('login ครั้งแรก')
         localStorage.setItem('jwtToken', userAuthentication.jwtToken)
         let userAfterDecodeJWT = jwtDecode(userAuthentication.jwtToken).user
         this.setJwtToken(userAuthentication.jwtToken)
@@ -94,7 +91,7 @@ export default {
       this.alreadyLogin = false
     },
     verifyJWT: async function(){
-      let verifyData = await axios.get('http://localhost:3006/users', {
+      let verifyData = await axios.get(process.env.VUE_APP_USER_SERVICE_URL + '/users', {
         headers: {
           Authorization: localStorage.getItem('jwtToken')
         }
@@ -116,9 +113,6 @@ export default {
 </script>
 
 <style scoped>
-  /* .v-navigation-drawer, .v-toolbar, .v-footer {
-    display: none;
-  } */
   #background {
     background-image: url("https://scontent.fbkk6-2.fna.fbcdn.net/v/t1.0-9/23844857_10155288832968789_8091596763212753375_n.jpg?_nc_cat=106&_nc_eui2=AeHyGuSX8hHWQacYDXKfUsobwJMBvCSdItX1D8Ts_Y42CbXFJhQaYSTIs59HjOh5svKrP9hr-FauQw2OPCI288gC7Op93DpB1P6Np98wAVBMZQ&_nc_ht=scontent.fbkk6-2.fna&oh=0f563d4bc2aa5a3e965282d4dda9bc96&oe=5C781663");
     background-size: 100%;
