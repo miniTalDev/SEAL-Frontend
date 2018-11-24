@@ -1,16 +1,14 @@
 <template>
   <v-content>
     <v-container fluid>
-      <!-- <v-container grid-list-md > -->
-        <v-layout row wrap align-end flexbox>
-            <v-flex v-for="video in videoDetails" :key="video.video_id" xs12 >
-                <router-link :to="`/player/${video.video_id}`" @click="testLoad()">
-                  <video-card :imgURL="video.video_thumbnail" :videoID="video.video_id" :videoDate="video.video_date"
-                  :teacherName="video.teacher.teacher_name" :subjectName="video.video_name"  />
-                </router-link>
-            </v-flex>
-        </v-layout>
-      <!-- </v-container> -->
+      <v-layout row wrap align-end flexbox>
+          <v-flex v-for="video in videoDetails" :key="video.video_id" xs12 >
+              <router-link :to="`/player/${video.video_id}`" @click="testLoad()">
+                <video-card :imgURL="video.video_thumbnail" :videoID="video.video_id" :videoDate="video.video_date"
+                :teacherName="video.teacher.teacher_name" :subjectName="video.video_name"  />
+              </router-link>
+          </v-flex>
+      </v-layout>
     </v-container>
   </v-content>
 </template>
@@ -44,13 +42,17 @@ export default {
   },
   methods: {
     loadAllVideoCard: async function () {
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       let videoDetails = await axios.get(
-        process.env.VUE_APP_VIDEO_SERVICE_URL +
-          `/subject/${this.subjectID}/videos`
+        `${process.env.VUE_APP_VIDEO_SERVICE_URL}/subject/${this.subjectID}/videos`,
+        {
+          headers: {
+            Authorization: `Bearer ${jwtTokenLocalStorage}`
+          }
+        }
       )
       videoDetails = videoDetails.data
       this.videoDetails = videoDetails
-      console.log(this.subjectID)
       this.dialog = false
     },
     fetchVideoById: function (videoId) {},
