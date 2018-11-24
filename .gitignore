@@ -7,3 +7,5 @@ logs
 *.log
 .next
 dist/
+manifest.yml
+.env.*
