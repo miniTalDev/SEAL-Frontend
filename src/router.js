@@ -36,6 +36,11 @@ let router = new Router({
       path: '/faculty/:facultyID/:keyword',
       name: 'keyword',
       component: () => import('./views/SearchSubject.vue')
+    },
+    {
+      path: '/subject/:keyword',
+      name: 'searchsubject',
+      component: () => import('./views/SearchSubject.vue')
     }
   ]
 })
