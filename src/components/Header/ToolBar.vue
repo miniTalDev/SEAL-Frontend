@@ -65,7 +65,10 @@
           class="headline grey lighten-2"
           primary-title
         >
-          <v-text-field prepend-icon="search" placeholder="ลองหาวีดีโอดูสิ~" v-model="searchKeyword" @keyup.enter="Search(searchKeyword)"></v-text-field>
+          <v-text-field prepend-icon="search" placeholder="ลองหาวีดีโอดูสิ~" v-model="searchKeyword">
+            <div v-if="getFacultyID === 0" @keyup.enter="SearchSubject(searchKeyword)"></div>
+            <div v-else @keyup.enter="SearchSubject(searchKeyword)"></div>
+          </v-text-field>
         </v-card-title>
       </v-card>
     </v-dialog>
@@ -144,8 +147,13 @@ export default {
       this.$router.replace({ path: '/faculty/' + program_id })
       this.setFacultyID(program_id)
     },
-    Search (searchKeyword) {
+    SearchSubjectByFacultyID (searchKeyword) {
       this.$router.replace({ path: '/faculty/' + this.getFacultyID() + '/' + searchKeyword })
+      this.setKeyword(searchKeyword)
+      this.dialog = false
+    }, 
+    SearchSubject (searchKeyword) {
+      this.$router.replace({ path: '/subject/'+ searchKeyword})
       this.setKeyword(searchKeyword)
       this.dialog = false
     }
