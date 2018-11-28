@@ -9,7 +9,7 @@
         <v-btn icon @click.native="dialog = true">
             <v-icon>search</v-icon>
         </v-btn>
-        <v-btn fab @click="Page('/login')">
+        <v-btn fab @click="page('/login')">
         <v-avatar>
             <img :src="`${this.getUser.userImg}`"/>
         </v-avatar>
@@ -21,7 +21,7 @@
           <v-list-tile
           v-for="item in items"
             :key="item.title"
-            @click="Page(item.page)"
+            @click="page(item.page)"
           >
             <v-list-tile-action>
               <v-icon v-html="item.icon"></v-icon>
@@ -36,7 +36,7 @@
           <v-list-tile
           v-for="item in favorite"
             :key="item.title"
-            @click="Page(item.page)"
+            @click="page(item.page)"
           >
             <v-list-tile-action>
               <v-icon v-html="item.icon"></v-icon>
@@ -48,7 +48,7 @@
         </v-list>
         <v-subheader class="mt-1 grey--text text--darken-1">Curriculums</v-subheader>
         <v-list dense>
-          <v-list-tile v-for="item in faculties" :key="item.program_id" @click="PageFaculty(item.program_id)">
+          <v-list-tile v-for="item in faculties" :key="item.program_id" @click="pageFaculty(item.program_id)">
             <v-list-tile-action>
               <v-icon>favorites</v-icon>
             </v-list-tile-action>
@@ -65,9 +65,10 @@
           class="headline grey lighten-2"
           primary-title
         >
-          <v-text-field prepend-icon="search" placeholder="ลองหาวีดีโอดูสิ~" v-model="searchKeyword">
-            <div v-if="getFacultyID === 0" @keyup.enter="SearchSubject(searchKeyword)"></div>
-            <div v-else @keyup.enter="SearchSubject(searchKeyword)"></div>
+          <v-text-field prepend-icon="search"  @keyup.enter="searchByCondition(facultyID)"
+              placeholder="ลองหาวีดีโอดูสิ~" v-model="searchKeyword">
+
+            <div ></div>
           </v-text-field>
         </v-card-title>
       </v-card>
@@ -140,19 +141,27 @@ export default {
       faculties = faculties.data
       this.faculties = faculties
     },
-    Page (page) {
+    page (page) {
       this.$router.replace({ path: page })
     },
-    PageFaculty (program_id) {
+    pageFaculty (program_id) {
       this.$router.replace({ path: '/faculty/' + program_id })
       this.setFacultyID(program_id)
     },
-    SearchSubjectByFacultyID (searchKeyword) {
+    searchByCondition: function (facultyID){
+      if(facultyID === 0){
+        this.searchAllSubjects (this.searchKeyword)
+      }else {
+        this.searchSubjectByFacultyID(this.searchKeyword)
+      }
+    },
+    searchSubjectByFacultyID (searchKeyword) {
       this.$router.replace({ path: '/faculty/' + this.getFacultyID() + '/' + searchKeyword })
       this.setKeyword(searchKeyword)
       this.dialog = false
     }, 
-    SearchSubject (searchKeyword) {
+    searchAllSubjects (searchKeyword) {
+      console.log("find sub all the world")
       this.$router.replace({ path: '/subject/'+ searchKeyword})
       this.setKeyword(searchKeyword)
       this.dialog = false
