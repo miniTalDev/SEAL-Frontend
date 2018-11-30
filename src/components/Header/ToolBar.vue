@@ -88,6 +88,9 @@ export default {
   },
   mounted () {
     this.loadUserDetail()
+    if(localStorage.getItem('jwtToken') != null){
+      this.loadAllFaculties()
+    }
   },
   props: {
   },
