@@ -9,6 +9,7 @@
     </v-app>
 </template>
 <script>
+import axios from 'axios'
 import ToolBar from './components/Header/ToolBar'
 import { mapGetters } from 'vuex'
 export default {
@@ -19,6 +20,11 @@ export default {
   mounted () {
     console.log(process.env.VUE_APP_TEST)
     console.log(process.env.lnwza)
+    // axios.get('http://localhost:3000/test',{
+    //   headers: {
+    //     'Authorization': localStorage.getItem('jwtToken')
+    //   }
+    // })
   },
   props: {
     msg: String
