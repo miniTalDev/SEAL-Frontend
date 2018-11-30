@@ -138,7 +138,13 @@ export default {
             'Authorization': `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal(
+          'Cancelled', 'Your file is still intact', 'info'
+        );
+        this.$router.push('/login')
+      })
       faculties = faculties.data
       console.log('--- Programs ---')
       console.log(faculties)

@@ -11,6 +11,9 @@ import VueXgplayer from 'vue-xgplayer'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+Vue.use(VueSweetalert2);
 
 (function (d, s, id) {
   var js

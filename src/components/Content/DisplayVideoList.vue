@@ -71,7 +71,10 @@ export default {
             Authorization: `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$router.push('/login')
+      })
       videoDetails = videoDetails.data
       this.videoDetails = videoDetails
       console.log(this.subjectID)
