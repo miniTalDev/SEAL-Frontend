@@ -142,7 +142,6 @@ export default {
     },
     loadAllFaculties: async function () {
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
-      console.log(jwtTokenLocalStorage)
       let faculties = await axios.get(
         `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`,
         {

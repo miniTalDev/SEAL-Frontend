@@ -75,9 +75,6 @@ export default {
       subjectDetails = subjectDetails.data
       this.subjectDetails = subjectDetails
       this.dialog = false
-    },
-    fetchSubjectById: function (subjectId) {
-      console.log('Click and Load Subject By ID : ' + subjectId)
     }
   }
 }
