@@ -10,7 +10,7 @@
               <img class="logo-img" src="https://www.sit.kmutt.ac.th/en/wp-content/uploads/2018/05/logo-flat-blk.png"/>
               <v-form>
                 <v-text-field v-model="username" prepend-icon="person" name="login" label="Login" type="text" ></v-text-field>
-                <v-text-field v-model="password" prepend-icon="lock" name="password" label="Password" id="password" type="password"></v-text-field>
+                <v-text-field v-model="password" prepend-icon="lock" name="password" label="Password" id="password" type="password" @keyup.enter.native="loginAuthen()"></v-text-field>
               </v-form>
             </v-card-text>
               <v-btn color="rgb(163,190,140)" @click="loginAuthen()">Login</v-btn>
@@ -74,7 +74,9 @@ export default {
           id,
           password
         }
-      )
+      ).catch((error)=>{
+          this.$swal('กรุณา login ใหม่', error.response.data.message , 'error');
+      })
       userAuthentication = userAuthentication.data
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       if (userAuthentication != null) {
@@ -102,16 +104,6 @@ export default {
         }
       )
       verifyData = verifyData
-      console.log(verifyData)
-      if(verifyData == undefined){
-        console.log(' un defined time out fuq')
-      }
-      else if(verifyData == null){
-        console.log('null')
-      }
-      else{
-        console.log('value got it')
-      }
     }
   }
 }
