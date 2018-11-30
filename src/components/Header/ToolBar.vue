@@ -35,11 +35,11 @@
         <v-list dense>
           <v-list-group>
             <v-list-tile slot="activator">
+              <v-list-tile-action>
+                <v-icon>favorites</v-icon>
+              </v-list-tile-action>
               <v-list-tile-content>
-                <v-list-tile-title >
-                  <v-icon>favorites</v-icon>
-                    Favorite
-                </v-list-tile-title>
+                <v-list-tile-title>Favorites</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
 
@@ -49,7 +49,7 @@
               @click="page(item.page)"
             >
               <v-list-tile-action>
-                <v-icon v-html="item.icon"></v-icon>
+                <v-icon v-html="item.icon" color="red"></v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>{{item.title}}</v-list-tile-title>
