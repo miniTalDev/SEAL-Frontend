@@ -46,7 +46,6 @@ export default {
   name: 'PlayVideo',
   mounted () {
     if (localStorage.getItem('jwtToken') == null) {
-      console.log('login fail !!!')
       this.$router.push({ path: '/login' })
     } else {
       this.fetchVideoDetail()
@@ -84,7 +83,6 @@ export default {
   methods: {
     fetchVideoDetail: async function () {
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
-      console.log('87 : '+jwtTokenLocalStorage)
       this.videoID = this.$route.params.videoID
       let videoDetail = await axios.get(
         `${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`,
@@ -93,7 +91,11 @@ export default {
             Authorization: `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
+        this.$router.push('/login')
+      })
       videoDetail = videoDetail.data
       this.videoDetail.teacherName = videoDetail.teacher.teacher_name
       this.videoDetail.videoDate = videoDetail.video_date
@@ -104,6 +106,11 @@ export default {
       })
     },
     play () {}
+  },
+  watch: {
+    '$route.params.videoID': function (videoID) {
+      this.fetchVideoDetail(videoID)
+    }
   }
 }
 </script>

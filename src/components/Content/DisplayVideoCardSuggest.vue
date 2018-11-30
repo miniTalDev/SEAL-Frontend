@@ -51,7 +51,11 @@ export default {
             Authorization: `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
+        this.$router.push('/login')
+      })
       videoDetails = videoDetails.data
       this.videoDetails = videoDetails
       this.dialog = false

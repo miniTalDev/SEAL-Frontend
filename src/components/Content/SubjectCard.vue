@@ -2,6 +2,7 @@
   <v-hover>
     <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`"
   class="mx-auto subject-card">
+  <router-link :to="`/subject/${subjectID}`">
       <v-img class="thumbnail"
         src="https://cdn.dribbble.com/users/5485/screenshots/2187027/programming.png"
         aspect-ratio="2.75"
@@ -11,6 +12,10 @@
         <br/>
         <span class="">{{subjectName}}</span>
       </v-card-text>
+  </router-link>
+  <v-btn icon>
+          <v-icon dark>favorite</v-icon>
+  </v-btn>
     </v-card>
   </v-hover>
 </template>
@@ -39,7 +44,7 @@ export default {
 <style scoped>
 .subject-card {
   width: auto;
-  height: 200px;
+  height: 250px;
   overflow: hidden;
   border-radius: 10px;
   margin-bottom: 10px;

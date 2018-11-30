@@ -17,9 +17,7 @@ export default {
     DisplayVideoList
   },
   mounted () {
-    console.log('Getter Work : ' + this.facultyID)
     if (localStorage.getItem('jwtToken') == null) {
-      console.log('login fail !!!')
       this.$router.push({ path: '/login' })
     }
   },
@@ -33,11 +31,12 @@ export default {
   methods: {},
   computed: {
     ...mapGetters(['getFacultyID'])
-  },
-  watch: {
-    getFacultyID: function () {
-      console.log(this.getFacultyID)
-    }
   }
 }
 </script>
+
+<style scoped>
+  .title-subject {
+    display: none !important;
+  }
+</style>

@@ -31,26 +31,37 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
-        <v-subheader class="mt-1 grey--text text--darken-1">Favorite</v-subheader>
+
         <v-list dense>
-          <v-list-tile
-          v-for="item in favorite"
-            :key="item.title"
-            @click="page(item.page)"
-          >
-            <v-list-tile-action>
-              <v-icon v-html="item.icon"></v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{item.title}}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-action>
+                <v-icon>favorites</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Favorites</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
+            <v-list-tile
+            v-for="item in favorite"
+              :key="item.title"
+              @click="page(item.page)"
+            >
+              <v-list-tile-action>
+                <v-icon v-html="item.icon" color="red"></v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{item.title}}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-group>
         </v-list>
         <v-subheader class="mt-1 grey--text text--darken-1">Curriculums</v-subheader>
         <v-list dense>
           <v-list-tile v-for="item in faculties" :key="item.program_id" @click="pageFaculty(item.program_id)">
             <v-list-tile-action>
-              <v-icon>favorites</v-icon>
+              <v-icon>layers</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>{{item.program_name}}</v-list-tile-title>
@@ -88,7 +99,9 @@ export default {
   },
   mounted () {
     this.loadUserDetail()
-    this.loadAllFaculties()
+    if(localStorage.getItem('jwtToken') != null){
+      this.loadAllFaculties()
+    }
   },
   props: {
   },
@@ -124,13 +137,11 @@ export default {
       if (jwtToken != null) {
         this.alreadyLogin = true
         let user = jwtDecode(jwtToken).user
-        console.log(user)
         this.setUser(user)
       }
     },
     loadAllFaculties: async function () {
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
-      console.log(jwtTokenLocalStorage)
       let faculties = await axios.get(
         `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/programs`,
         {
@@ -138,10 +149,12 @@ export default {
             'Authorization': `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
+        this.$router.push('/login')
+      })
       faculties = faculties.data
-      console.log('--- Programs ---')
-      console.log(faculties)
       this.faculties = faculties
     },
     page (page) {
@@ -164,7 +177,6 @@ export default {
       this.dialog = false
     }, 
     searchAllSubjects (searchKeyword) {
-      console.log("find sub all the world")
       this.$router.replace({ path: '/subject/'+ searchKeyword})
       this.setKeyword(searchKeyword)
       this.dialog = false

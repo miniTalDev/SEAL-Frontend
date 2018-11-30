@@ -2,12 +2,15 @@
 <v-app>
   <v-content>
     <v-container fluid>
-      <v-container grid-list-md >
+      <v-container grid-list-md>
+        <v-layout row wrap flexbox>
+          <v-flex>
+            <h2 class="title-course">Bachelor of Science Program in Information Technology</h2>
+          </v-flex>
+        </v-layout>
         <v-layout row wrap align-end flexbox>
             <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs12 sm3 >
-                <router-link :to="`/subject/${subject.subject_id}`">
                   <subject-card :subjectID="subject.subject_id" :subjectCode="subject.subject_code" :subjectName="subject.subject_name"/>
-                </router-link>
             </v-flex>
         </v-layout>
       </v-container>
@@ -50,9 +53,7 @@ export default {
   props: {},
   mounted () {
     this.dialog = true
-    console.log('router protection : ' + localStorage.getItem('jwtToken'))
     if (localStorage.getItem('jwtToken') == null) {
-      console.log('login fail !!!')
       this.$router.push({ path: '/login' })
     } else {
       this.loadAllSubjectFromFaculty()
@@ -76,16 +77,27 @@ export default {
             Authorization: `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
+        this.$router.push('/login')
+      })
       subjectDetails = subjectDetails.data
       this.setFacultyID(this.facultyID)
-      console.log(subjectDetails)
       this.subjectDetails = subjectDetails
       this.dialog = false
-    },
-    fetchSubjectById: function (subjectId) {
-      console.log('Click and Load Subject By ID : ' + subjectId)
     }
   }
 }
 </script>
+
+<style scoped>
+  .space-top {
+    margin-top: 60px;
+  }
+
+  .title-course {
+    color: #fff;
+    text-align: left;
+  }
+</style>
