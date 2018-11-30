@@ -26,7 +26,7 @@ export default {
   methods: {
     loadToolBar: function() {
       console.log("emit work!!!");
-      this.refs.loadAllFaculties()
+      this.$refs.toolBar.loadAllFaculties()
     }
   },
   computed: {
