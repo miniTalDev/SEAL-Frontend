@@ -17,3 +17,5 @@ else
     echo "Please try again..."
     exit 0
 fi
+
+yarn build
