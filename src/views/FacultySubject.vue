@@ -50,9 +50,7 @@ export default {
   props: {},
   mounted () {
     this.dialog = true
-    console.log('router protection : ' + localStorage.getItem('jwtToken'))
     if (localStorage.getItem('jwtToken') == null) {
-      console.log('login fail !!!')
       this.$router.push({ path: '/login' })
     } else {
       this.loadAllSubjectFromFaculty()
@@ -83,12 +81,8 @@ export default {
       })
       subjectDetails = subjectDetails.data
       this.setFacultyID(this.facultyID)
-      console.log(subjectDetails)
       this.subjectDetails = subjectDetails
       this.dialog = false
-    },
-    fetchSubjectById: function (subjectId) {
-      console.log('Click and Load Subject By ID : ' + subjectId)
     }
   }
 }

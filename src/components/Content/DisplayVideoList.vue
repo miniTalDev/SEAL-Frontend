@@ -78,7 +78,6 @@ export default {
       })
       videoDetails = videoDetails.data
       this.videoDetails = videoDetails
-      console.log(this.subjectID)
       this.dialog = false
     },
     fetchVideoById: function (videoId) {},

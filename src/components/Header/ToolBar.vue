@@ -137,7 +137,6 @@ export default {
       if (jwtToken != null) {
         this.alreadyLogin = true
         let user = jwtDecode(jwtToken).user
-        console.log(user)
         this.setUser(user)
       }
     },
@@ -157,8 +156,6 @@ export default {
         this.$router.push('/login')
       })
       faculties = faculties.data
-      console.log('--- Programs ---')
-      console.log(faculties)
       this.faculties = faculties
     },
     page (page) {
@@ -181,7 +178,6 @@ export default {
       this.dialog = false
     }, 
     searchAllSubjects (searchKeyword) {
-      console.log("find sub all the world")
       this.$router.replace({ path: '/subject/'+ searchKeyword})
       this.setKeyword(searchKeyword)
       this.dialog = false

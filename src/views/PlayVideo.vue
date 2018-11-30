@@ -46,7 +46,6 @@ export default {
   name: 'PlayVideo',
   mounted () {
     if (localStorage.getItem('jwtToken') == null) {
-      console.log('login fail !!!')
       this.$router.push({ path: '/login' })
     } else {
       this.fetchVideoDetail()
@@ -84,7 +83,6 @@ export default {
   methods: {
     fetchVideoDetail: async function () {
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
-      console.log('87 : '+jwtTokenLocalStorage)
       this.videoID = this.$route.params.videoID
       let videoDetail = await axios.get(
         `${process.env.VUE_APP_VIDEO_SERVICE_URL}/video/${this.videoID}`,
