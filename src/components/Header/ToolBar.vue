@@ -140,9 +140,7 @@ export default {
         }
       ).catch((response)=>{
         localStorage.removeItem('jwtToken')
-        this.$swal(
-          'Cancelled', 'Your file is still intact', 'info'
-        );
+        this.$swal('กรุณา login', '', 'error');
         this.$router.push('/login')
       })
       faculties = faculties.data

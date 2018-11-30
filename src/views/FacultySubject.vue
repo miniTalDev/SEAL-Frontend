@@ -76,7 +76,11 @@ export default {
             Authorization: `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', '', 'error');
+        this.$router.push('/login')
+      })
       subjectDetails = subjectDetails.data
       this.setFacultyID(this.facultyID)
       console.log(subjectDetails)

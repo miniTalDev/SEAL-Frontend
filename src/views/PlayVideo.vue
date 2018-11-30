@@ -93,7 +93,11 @@ export default {
             Authorization: `Bearer ${jwtTokenLocalStorage}`
           }
         }
-      )
+      ).catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', '', 'error');
+        this.$router.push('/login')
+      })
       videoDetail = videoDetail.data
       this.videoDetail.teacherName = videoDetail.teacher.teacher_name
       this.videoDetail.videoDate = videoDetail.video_date

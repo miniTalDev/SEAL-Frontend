@@ -73,6 +73,7 @@ export default {
         }
       ).catch((response)=>{
         localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', '', 'error');
         this.$router.push('/login')
       })
       videoDetails = videoDetails.data
