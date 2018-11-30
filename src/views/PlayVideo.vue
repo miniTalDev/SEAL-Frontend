@@ -95,7 +95,7 @@ export default {
         }
       ).catch((response)=>{
         localStorage.removeItem('jwtToken')
-        this.$swal('กรุณา login', '', 'error');
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
         this.$router.push('/login')
       })
       videoDetail = videoDetail.data
@@ -108,6 +108,11 @@ export default {
       })
     },
     play () {}
+  },
+  watch: {
+    '$route.params.videoID': function (videoID) {
+      this.fetchVideoDetail(videoID)
+    }
   }
 }
 </script>

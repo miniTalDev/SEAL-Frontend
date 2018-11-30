@@ -88,7 +88,6 @@ export default {
   },
   mounted () {
     this.loadUserDetail()
-    this.loadAllFaculties()
   },
   props: {
   },
@@ -140,7 +139,7 @@ export default {
         }
       ).catch((response)=>{
         localStorage.removeItem('jwtToken')
-        this.$swal('กรุณา login', '', 'error');
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
         this.$router.push('/login')
       })
       faculties = faculties.data
