@@ -31,26 +31,37 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
-        <v-subheader class="mt-1 grey--text text--darken-1">Favorite</v-subheader>
+
         <v-list dense>
-          <v-list-tile
-          v-for="item in favorite"
-            :key="item.title"
-            @click="page(item.page)"
-          >
-            <v-list-tile-action>
-              <v-icon v-html="item.icon"></v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{item.title}}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+          <v-list-group>
+            <v-list-tile slot="activator">
+              <v-list-tile-content>
+                <v-list-tile-title >
+                  <v-icon>favorites</v-icon>
+                    Favorite
+                </v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+
+            <v-list-tile
+            v-for="item in favorite"
+              :key="item.title"
+              @click="page(item.page)"
+            >
+              <v-list-tile-action>
+                <v-icon v-html="item.icon"></v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{item.title}}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-group>
         </v-list>
         <v-subheader class="mt-1 grey--text text--darken-1">Curriculums</v-subheader>
         <v-list dense>
           <v-list-tile v-for="item in faculties" :key="item.program_id" @click="pageFaculty(item.program_id)">
             <v-list-tile-action>
-              <v-icon>favorites</v-icon>
+              <v-icon>layers</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>{{item.program_name}}</v-list-tile-title>
