@@ -1,7 +1,12 @@
 <template>
 <v-content>
   <v-container fluid>
-    <v-container grid-list-md >
+    <v-container grid-list-md class="space-top">
+      <v-layout row wrap flexbox>
+        <v-flex>
+          <h2 class="title-subject">INT101 Information Technology Fundamental</h2>
+        </v-flex>
+      </v-layout>
       <v-layout row wrap align-end flexbox>
         <v-flex v-for="video in videoDetails" :key="video.video_id" xs12 sm3>
           <router-link :to="`/player/${video.video_id}`" @click="testLoad()">
@@ -89,5 +94,14 @@ export default {
 <style scoped>
   .v-content {
     padding-top: 0px !important;
+  }
+
+  .space-top {
+    margin-top: 60px;
+  }
+
+  .title-subject {
+    color: #fff;
+    text-align: left;
   }
 </style>

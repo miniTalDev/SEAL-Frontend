@@ -2,7 +2,12 @@
 <v-app>
   <v-content>
     <v-container fluid>
-      <v-container grid-list-md class="space-top">
+      <v-container grid-list-md>
+        <v-layout row wrap flexbox>
+          <v-flex>
+            <h2 class="title-course">Bachelor of Science Program in Information Technology</h2>
+          </v-flex>
+        </v-layout>
         <v-layout row wrap align-end flexbox>
             <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs12 sm3 >
                   <subject-card :subjectID="subject.subject_id" :subjectCode="subject.subject_code" :subjectName="subject.subject_name"/>
@@ -89,5 +94,10 @@ export default {
 <style scoped>
   .space-top {
     margin-top: 60px;
+  }
+
+  .title-course {
+    color: #fff;
+    text-align: left;
   }
 </style>

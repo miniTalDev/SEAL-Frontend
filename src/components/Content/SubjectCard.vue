@@ -44,6 +44,7 @@ export default {
 <style scoped>
 .subject-card {
   width: auto;
+  height: 250px;
   overflow: hidden;
   border-radius: 10px;
   margin-bottom: 10px;

@@ -34,3 +34,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .title-subject {
+    display: none !important;
+  }
+</style>
