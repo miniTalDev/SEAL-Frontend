@@ -3,7 +3,7 @@
     <ToolBar v-show="getIsShowToolBar" ref="toolBar"/>
     <router-view  @loadToolBarAfterLogin="loadToolBar()"></router-view>
     <v-footer color="black" app inset>
-      <span class="white--text">&copy; Seal-Learning X VueJS</span>
+      <p class="white--text text-copyright">&copy; Seal-Learning X VueJS</p>
     </v-footer>
   </v-app>
 </template>
@@ -57,5 +57,11 @@ a {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.text-copyright {
+  margin: 0px;
+  position: absolute;
+  right: 10px;
 }
 </style>
