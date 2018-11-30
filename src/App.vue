@@ -1,36 +1,38 @@
 <template>
-    <v-app>
-      <ToolBar v-show="getIsShowToolBar" />
-      <router-view></router-view>
-      <v-footer color="black" app inset>
-        <span class="white--text">
-          &copy; Seal-Learning X VueJS</span>
-      </v-footer>
-    </v-app>
+  <v-app>
+    <ToolBar v-show="getIsShowToolBar" ref="toolBar"/>
+    <router-view  @loadToolBarAfterLogin="loadToolBar()"></router-view>
+    <v-footer color="black" app inset>
+      <span class="white--text">&copy; Seal-Learning X VueJS</span>
+    </v-footer>
+  </v-app>
 </template>
 <script>
-import ToolBar from './components/Header/ToolBar'
-import { mapGetters } from 'vuex'
+import axios from "axios";
+import ToolBar from "./components/Header/ToolBar";
+import { mapGetters } from "vuex";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     ToolBar
   },
-  mounted () {
-    console.log(process.env.VUE_APP_TEST)
-    console.log(process.env.lnwza)
+  mounted() {
+    console.log(process.env.VUE_APP_TEST);
+    console.log(process.env.lnwza);
   },
-  props: {
-    msg: String
+  data() {
+    return {};
   },
-  data () {
-    return {
+  methods: {
+    loadToolBar: function() {
+      console.log("emit work!!!");
+      this.refs.loadAllFaculties()
     }
   },
   computed: {
-    ...mapGetters(['getIsShowToolBar'])
+    ...mapGetters(["getIsShowToolBar"])
   }
-}
+};
 </script>
 <style>
 a {

@@ -46,6 +46,7 @@ export default {
       let videoDetails = await axios.get(
         `${process.env.VUE_APP_VIDEO_SERVICE_URL}/subject/${this.subjectID}/videos`,
         {
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${jwtTokenLocalStorage}`
           }

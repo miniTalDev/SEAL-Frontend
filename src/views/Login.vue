@@ -83,6 +83,7 @@ export default {
         this.setJwtToken(userAuthentication.jwtToken)
         this.setUser(userAfterDecodeJWT)
         this.setIsShowToolBar(true)
+        this.$emit('loadToolBarAfterLogin')
         this.$router.push('/')
       }
     },
