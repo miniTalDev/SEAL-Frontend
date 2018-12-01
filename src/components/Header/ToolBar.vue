@@ -44,15 +44,19 @@
             </v-list-tile>
 
             <v-list-tile
-            v-for="item in getFavorite"
+            v-for="(item, index) in getFavorite"
               :key="item.id"
-              @click="page(`/subject/${item.subject_id}?subjectName=${item.subject_name}`)"
+              @click="page(`/subject/${item.subjectId}?subjectName=${favoriteSubject[index]}`)"
             >
                 <v-list-tile-action>
                   <v-icon color="red">favorites</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>{{item.subject_name}}</v-list-tile-title>
+                  <v-list-tile-title>
+                    <!-- {{item.subject_name}} -->
+                    {{favoriteSubject[index]}}
+                    <!-- {{findSubjectNameById(parseInt(item.subjectId))}} -->
+                  </v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
@@ -166,16 +170,40 @@ export default {
           this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
           this.$router.push('/login')
         })
-        let result = []
-        for (let i = 0; i < favoriteDetail.data.length; i++) {
-          result.push(favoriteDetail.data[i])
+        console.log(favoriteDetail.data)
+
+        let favorites = favoriteDetail.data
+        this.setFavorite(favorites)
+
+        for (let i = 0; i < favorites.length; i++) {
+          //result.push(favoriteDetail.data[i])
+          console.log(favorites[i])
+          console.log(this.findSubjectNameById(parseInt(favorites[i].subjectId)))
+
         }
-        this.nameSubject(result)
+        //this.nameSubject(result)
+    },
+    findSubjectNameById: async function(subjectId){
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
+      let subject = await axios.get(
+          `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/subject/${subjectId}`,{
+            headers: {
+              'Authorization': `Bearer ${jwtTokenLocalStorage}`
+            }
+          })
+          this.favoriteSubject.push(subject.data.subject_name)
+          console.log(subject.data.subject_name)
+          //return subject.data.subject_name
     },
     nameSubject: async function(result){
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       for (let i = 0; i < result.length; i++) {
         let subject = await axios.get(
-          `${VUE_APP_PROGRAM_SERVICE_URL}/${result[i].subjectId}`)
+          `${VUE_APP_PROGRAM_SERVICE_URL}/subject/${result[i].subjectId}`,{
+            headers: {
+              'Authorization': `Bearer ${jwtTokenLocalStorage}`
+            }
+          })
           this.favoriteSubject.push(subject.data)
       }
       this.setFavorite(this.favoriteSubject)
