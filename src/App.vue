@@ -27,6 +27,7 @@ export default {
     loadToolBar: function() {
       console.log("emit work!!!");
       this.$refs.toolBar.loadAllFaculties()
+      this.$refs.toolBar.loadAllFavorite()
     }
   },
   computed: {
