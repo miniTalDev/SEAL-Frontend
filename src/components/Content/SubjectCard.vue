@@ -14,8 +14,7 @@
       </v-card-text>
   </router-link>
     <div v-if="isFavouriteByUser">
-      <v-btn icon @click="disloveFavorite(subjectID)">
-        {{subjectID}}
+      <v-btn icon @click="disloveFavorite(favouriteId)">
           <v-icon dark color="red">favorite</v-icon>
       </v-btn>
     </div>
@@ -29,6 +28,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import {mapActions, mapGetters} from 'vuex'
 export default {
   name: 'SubjectCard',
@@ -42,7 +42,8 @@ export default {
     return {
       reviews: 413,
       value: 4.5,
-      isFavouriteByUser: false
+      isFavouriteByUser: false,
+      favouriteId: 0
     }
   },
   mounted(){
@@ -57,6 +58,8 @@ export default {
       // console.log('User Fave : '+ subjectFavourites[1])
       for(let i = 0; i < subjectFavourites.length; i++){
         if( subjectFavourites[i].subjectId == this.subjectID){
+          console.log(subjectFavourites[i].id)
+          this.favouriteId = subjectFavourites[i].id
           this.isFavouriteByUser = true
           //console.log('Favourited by User : ' + this.subjectID)
         }
@@ -80,10 +83,11 @@ export default {
         this.$router.push('/login')
       })
     },
-    disloveFavorite: async function(Id){
+    disloveFavorite: async function(favouriteId){
+      this.isFavouriteByUser = false
       console.log('dislove')
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
-      let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+this.getUser.userId+'/'+Id,
+      let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+this.getUser.userId+'/'+favouriteId,
       {
         headers:{
             'Authorization': `Bearer ${jwtTokenLocalStorage}`
