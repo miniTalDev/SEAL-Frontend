@@ -53,9 +53,7 @@
                 </v-list-tile-action>
                 <v-list-tile-content>
                   <v-list-tile-title>
-                    <!-- {{item.subject_name}} -->
                     {{favoriteSubject[index]}}
-                    <!-- {{findSubjectNameById(parseInt(item.subjectId))}} -->
                   </v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
@@ -170,21 +168,13 @@ export default {
           this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
           this.$router.push('/login')
         })
-        console.log(favoriteDetail.data)
-
         let favorites = favoriteDetail.data
         this.setFavorite(favorites)
-
         for (let i = 0; i < favorites.length; i++) {
-          //result.push(favoriteDetail.data[i])
-          console.log(favorites[i])
-          console.log(this.findSubjectNameById(parseInt(favorites[i].subjectId)))
-
+          this.findSubjectNameById(parseInt(favorites[i].subjectId))
         }
-        //this.nameSubject(result)
     },
     findSubjectNameById: async function(subjectId){
-      // ใช้ตัวนี้ในการนำ subjectId ไปหาชื่อวิชาแทน
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       let subject = await axios.get(
           `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/subject/${subjectId}`,{
@@ -193,7 +183,6 @@ export default {
             }
           })
           this.favoriteSubject.push(subject.data.subject_name)
-          console.log(subject.data.subject_name)
     },
     page (page) {
       this.$router.replace({ path: page })

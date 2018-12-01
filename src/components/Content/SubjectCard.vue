@@ -14,12 +14,12 @@
       </v-card-text>
   </router-link>
     <div v-if="subjectID===getFavorite.subject_id">
-      <v-btn icon @click="disloveFavorite(getFavorite)">
+      <v-btn icon @click="disloveFavorite(getFavorite.id)">
               <v-icon dark color="red">favorite</v-icon>
       </v-btn>
     </div>
     <div v-else>
-      <v-btn icon @click="loveFavorite(getFavorite.subject)">
+      <v-btn icon @click="loveFavorite(getFavorite.id)">
               <v-icon dark>favorite</v-icon>
       </v-btn>
     </div>
