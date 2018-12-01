@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker build -t (docker user id)/(docker repo) --build-arg GIT_COMMIT=$(git log -1 --format=%h) .
