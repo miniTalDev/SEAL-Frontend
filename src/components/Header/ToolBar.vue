@@ -46,14 +46,14 @@
             <v-list-tile
             v-for="item in getFavorite"
               :key="item.id"
-              @click="1"
+              @click="page(`/subject/${item.subject_id}?subjectName=${item.subject_name}`)"
             >
-              <v-list-tile-action>
-                <v-icon color="red">favorites</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>{{item.subject_name}}</v-list-tile-title>
-              </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-icon color="red">favorites</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{item.subject_name}}</v-list-tile-title>
+                </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
         </v-list>
@@ -179,6 +179,7 @@ export default {
           this.favoriteSubject.push(subject.data)
       }
       this.setFavorite(this.favoriteSubject)
+      console.log(this.favoriteSubject)
     },
     page (page) {
       this.$router.replace({ path: page })
