@@ -8,7 +8,7 @@
         aspect-ratio="2.75"
       ></v-img>
       <v-card-text>
-        <span class="title">{{subjectCode}}</span>
+        <span class="title">{{subjectCode}} || {{getFavorite.subject_id}}</span>
         <br/>
         <span class="">{{subjectName}}</span>
       </v-card-text>
@@ -19,7 +19,7 @@
       </v-btn>
     </div>
     <div v-else>
-      <v-btn icon @click="loveFavorite(getFavorite.id)">
+      <v-btn icon @click="loveFavorite(subjectID)">
               <v-icon dark>favorite</v-icon>
       </v-btn>
     </div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import {mapActions, mapGetters} from 'vuex'
 import axios from 'axios';
 export default {
@@ -46,15 +47,34 @@ export default {
   },
   methods: {
     ...mapActions(['setHeaderContent','setFavorite']),
-    loveFavorite: async function(subjectId){
-      let love = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/user/'+getUser.userId+'/subject',
+    loveFavorite: async function(subjectID){
+      console.log('love')
+      console.log(subjectID)
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
+      let love = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/user/'+this.getUser.userId+'/subject',
         {
-          "subjectId": subjectId
+          "subjectId": subjectID
+        },{
+          headers:{
+            'Authorization': `Bearer ${jwtTokenLocalStorage}`
+          }
         }
       )
+      .catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
+        this.$router.push('/login')
+      })
     },
     disloveFavorite: async function(Id){
-      let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+getUser.userId+'/'+Id)
+      console.log('dislove')
+      let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+this.getUser.userId+'/'+Id
+      )
+      .catch((response)=>{
+        localStorage.removeItem('jwtToken')
+        this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
+        this.$router.push('/login')
+      })
     }
   },
   computed: {
