@@ -13,14 +13,15 @@
         <span class="">{{subjectName}}</span>
       </v-card-text>
   </router-link>
-    <div v-if="subjectID===getFavorite.subject_id">
-      <v-btn icon @click="disloveFavorite(getFavorite.id)">
-              <v-icon dark color="red">favorite</v-icon>
+    <div v-if="isFavouriteByUser">
+      <v-btn icon @click="disloveFavorite(subjectID)">
+        {{subjectID}}
+          <v-icon dark color="red">favorite</v-icon>
       </v-btn>
     </div>
     <div v-else>
       <v-btn icon @click="loveFavorite(subjectID)">
-              <v-icon dark>favorite</v-icon>
+          <v-icon dark>favorite</v-icon>
       </v-btn>
     </div>
     </v-card>
@@ -28,7 +29,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import {mapActions, mapGetters} from 'vuex'
 import axios from 'axios';
 export default {
@@ -42,11 +42,27 @@ export default {
   data () {
     return {
       reviews: 413,
-      value: 4.5
+      value: 4.5,
+      isFavouriteByUser: false
     }
+  },
+  mounted(){
+    this.checkSubjectIsFavourited()
   },
   methods: {
     ...mapActions(['setHeaderContent','setFavorite']),
+    checkSubjectIsFavourited: function(){
+      // console.log('subject-card redered : '+this.subjectID)
+      let subjectFavourites = this.getFavorite
+      // console.log(subjectFavourites[0])
+      // console.log('User Fave : '+ subjectFavourites[1])
+      for(let i = 0; i < subjectFavourites.length; i++){
+        if( subjectFavourites[i].subjectId == this.subjectID){
+          this.isFavouriteByUser = true
+          //console.log('Favourited by User : ' + this.subjectID)
+        }
+      }
+    },
     loveFavorite: async function(subjectID){
       console.log('love')
       console.log(subjectID)
@@ -67,7 +83,7 @@ export default {
       })
     },
     disloveFavorite: async function(Id){
-      console.log('dislove')
+      console.log('dislove : '+ id)
       let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+this.getUser.userId+'/'+Id
       )
       .catch((response)=>{
