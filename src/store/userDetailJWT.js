@@ -9,7 +9,8 @@ export const userDetailJWT = {
       programName: 'Bachelor of Science Program in Information Technology',
       programCode: 'B.Sc.IT',
       role: 'ROLE_USER'
-    }
+    },
+    favorite: ''
   },
   actions: {
     setJwtToken: function ({ commit }, jwtToken) {
@@ -26,6 +27,9 @@ export const userDetailJWT = {
         role: 'ROLE_USER'
       }
       commit('setUser', temptUser)
+    },
+    setFavorite: function ({ commit }, favorite) {
+      commit('setFavorite', favorite)
     }
   },
   mutations: {
@@ -34,6 +38,9 @@ export const userDetailJWT = {
     },
     setUser: function (state, user) {
       state.user = user
+    },
+    setFavorite: function (state, favorite) {
+      state.favorite = favorite
     }
   },
   getters: {
@@ -42,6 +49,9 @@ export const userDetailJWT = {
     },
     getJwtToken: function (state) {
       return state.jwtToken
+    },
+    getFavorite: function (state) {
+      return state.favorite
     }
   }
 }

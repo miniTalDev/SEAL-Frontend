@@ -44,15 +44,15 @@
             </v-list-tile>
 
             <v-list-tile
-            v-for="item in favorite"
-              :key="item.title"
-              @click="page(item.page)"
+            v-for="item in getFavorite"
+              :key="item.id"
+              @click="1"
             >
               <v-list-tile-action>
-                <v-icon v-html="item.icon" color="red"></v-icon>
+                <v-icon color="red">favorites</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
-                <v-list-tile-title>{{item.title}}</v-list-tile-title>
+                <v-list-tile-title>{{item.subject_name}}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
@@ -101,11 +101,12 @@ export default {
   mounted () {
     this.loadUserDetail()
     if(localStorage.getItem('jwtToken') != null){
+      this.loadAllFavorite()
       this.loadAllFaculties()
     }
   },
   computed: {
-    ...mapGetters(['getUser'])
+    ...mapGetters(['getUser','getFavorite'])
   },
   data () {
     return {
@@ -121,15 +122,11 @@ export default {
         { title: 'All Videos', icon: 'videocam', page: '/' },
         { title: 'Subject', icon: 'school', page: '/' }
       ],
-      favorite: [
-        { title: 'Pivotal Gemfire', icon: 'favorites', page: '/' },
-        { title: 'Microservice With Spring Boot', icon: 'favorites', page: '/' },
-        { title: 'VueJS zero to hero', icon: 'favorites', page: '/' }
-      ]
+      favoriteSubject:[]
     }
   },
   methods: {
-    ...mapActions(['setFacultyID', 'setKeyword', 'setUser', 'setHeaderContent']),
+    ...mapActions(['setFacultyID', 'setKeyword', 'setUser', 'setHeaderContent', 'setFavorite']),
     ...mapGetters(['getFacultyID']),
     loadUserDetail: function () {
       let jwtToken = localStorage.getItem('jwtToken')
@@ -155,6 +152,33 @@ export default {
       })
       faculties = faculties.data
       this.faculties = faculties
+    },
+    loadAllFavorite: async function(){
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
+      let favoriteDetail = await axios.get(
+        `${process.env.VUE_APP_USER_SERVICE_URL}/favorites/user/${this.getUser.userId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${jwtTokenLocalStorage}`
+          }
+        }).catch((response)=>{
+          localStorage.removeItem('jwtToken')
+          this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
+          this.$router.push('/login')
+        })
+        let result = []
+        for (let i = 0; i < favoriteDetail.data.length; i++) {
+          result.push(favoriteDetail.data[i])
+        }
+        this.nameSubject(result)
+    },
+    nameSubject: async function(result){
+      for (let i = 0; i < result.length; i++) {
+        let subject = await axios.get(
+          `https://ngelearning.sit.kmutt.ac.th/api/v0/subject/${result[i].subjectId}`)
+          this.favoriteSubject.push(subject.data)
+      }
+      this.setFavorite(this.favoriteSubject)
     },
     page (page) {
       this.$router.replace({ path: page })
