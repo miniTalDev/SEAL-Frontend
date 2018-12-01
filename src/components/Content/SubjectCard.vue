@@ -2,7 +2,7 @@
   <v-hover>
     <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`"
   class="mx-auto subject-card">
-  <router-link :to="`/subject/${subjectID}`">
+  <router-link  :to="`/subject/${subjectID}?subjectName=${subjectName}`" >
       <v-img class="thumbnail"
         src="https://cdn.dribbble.com/users/5485/screenshots/2187027/programming.png"
         aspect-ratio="2.75"
@@ -21,10 +21,9 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   name: 'SubjectCard',
-  components: {},
-  mounted () {},
   props: {
     imgURL: String,
     subjectName: String,
@@ -37,7 +36,9 @@ export default {
       value: 4.5
     }
   },
-  methods: {}
+  methods: {
+    ...mapActions(['setHeaderContent'])
+  }
 }
 </script>
 

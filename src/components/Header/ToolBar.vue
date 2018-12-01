@@ -59,7 +59,8 @@
         </v-list>
         <v-subheader class="mt-1 grey--text text--darken-1">Curriculums</v-subheader>
         <v-list dense>
-          <v-list-tile v-for="item in faculties" :key="item.program_id" @click="pageFaculty(item.program_id)">
+          <v-list-tile v-for="item in faculties" :key="item.program_id" 
+              @click="pageFaculty(item.program_id); setHeaderContent(item.program_name)">
             <v-list-tile-action>
               <v-icon>layers</v-icon>
             </v-list-tile-action>
@@ -103,8 +104,6 @@ export default {
       this.loadAllFaculties()
     }
   },
-  props: {
-  },
   computed: {
     ...mapGetters(['getUser'])
   },
@@ -130,7 +129,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setFacultyID', 'setKeyword', 'setUser']),
+    ...mapActions(['setFacultyID', 'setKeyword', 'setUser', 'setHeaderContent']),
     ...mapGetters(['getFacultyID']),
     loadUserDetail: function () {
       let jwtToken = localStorage.getItem('jwtToken')

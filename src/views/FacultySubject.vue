@@ -5,12 +5,12 @@
       <v-container grid-list-md>
         <v-layout row wrap flexbox>
           <v-flex>
-            <h2 class="title-course">Bachelor of Science Program in Information Technology</h2>
+            <h2 class="title-course">{{getHeaderContent}}</h2>
           </v-flex>
         </v-layout>
         <v-layout row wrap align-end flexbox>
             <v-flex v-for="subject in subjectDetails" :key="subject.subject_id" xs12 sm3 >
-                  <subject-card :subjectID="subject.subject_id" :subjectCode="subject.subject_code" :subjectName="subject.subject_name"/>
+                <subject-card :subjectID="subject.subject_id" :subjectCode="subject.subject_code" :subjectName="subject.subject_name"/>
             </v-flex>
         </v-layout>
       </v-container>
@@ -35,7 +35,7 @@
 <script>
 import subjectCard from '../components/Content/SubjectCard.vue'
 import axios from 'axios'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'FacultySubject',
@@ -50,7 +50,9 @@ export default {
       dialog: false
     }
   },
-  props: {},
+  computed: {
+    ...mapGetters(['getHeaderContent'])
+  },
   mounted () {
     this.dialog = true
     if (localStorage.getItem('jwtToken') == null) {

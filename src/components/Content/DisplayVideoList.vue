@@ -4,7 +4,7 @@
     <v-container grid-list-md class="space-top">
       <v-layout row wrap flexbox>
         <v-flex>
-          <h2 class="title-subject">INT101 Information Technology Fundamental</h2>
+          <h2 class="title-subject" v-if="isHomePage == false">{{getHeaderContent}}</h2>
         </v-flex>
       </v-layout>
       <v-layout row wrap align-end flexbox>
@@ -41,31 +41,43 @@
 <script>
 import VideoCard from './VideoCard'
 import axios from 'axios'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name: 'DisplayVideoList',
   components: {
     VideoCard
   },
-  mounted () {
-    this.subjectID =
-      this.$route.params.subjectID === undefined
-        ? 2
-        : this.$route.params.subjectID
-    this.loadAllVideoCard()
-  },
-  props: {},
   data () {
     return {
       dialog: true,
       isShowMenu: false,
       videoDetails: [],
-      videoUrlSample:
-        'https://ngelearning.sit.kmutt.ac.th/api/v0/subject/2/videos',
-      subjectID: 2
+      videoUrlSample:'https://ngelearning.sit.kmutt.ac.th/api/v0/subject/2/videos',
+      subjectID: 2,
+      isHomePage: false
     }
   },
+  mounted () {
+    this.subjectID = this.$route.params.subjectID === undefined ? 2 : this.$route.params.subjectID
+    this.loadSubjectTitle()
+    this.loadAllVideoCard()
+  },
+  computed: {
+    ...mapGetters(['getHeaderContent'])
+  },
   methods: {
+    ...mapActions(['setHeaderContent']),
+    loadSubjectTitle: function(){
+      if(this.$route.path == '/'){
+        this.isHomePage = true
+      }
+      else{
+        console.log(this.$route.query.subjectName)
+        this.setHeaderContent(this.$route.query.subjectName)
+      }
+      console.log(this.$route.path)
+    },
     loadAllVideoCard: async function () {
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       let videoDetails = await axios.get(
