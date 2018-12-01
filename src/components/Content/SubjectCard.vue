@@ -30,7 +30,6 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
-import axios from 'axios';
 export default {
   name: 'SubjectCard',
   props: {
@@ -65,7 +64,6 @@ export default {
     },
     loveFavorite: async function(subjectID){
       console.log('love')
-      console.log(subjectID)
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       let love = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/user/'+this.getUser.userId+'/subject',
         {
@@ -83,9 +81,14 @@ export default {
       })
     },
     disloveFavorite: async function(Id){
-      console.log('dislove : '+ id)
-      let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+this.getUser.userId+'/'+Id
-      )
+      console.log('dislove')
+      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
+      let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+this.getUser.userId+'/'+Id,
+      {
+        headers:{
+            'Authorization': `Bearer ${jwtTokenLocalStorage}`
+          }
+      })
       .catch((response)=>{
         localStorage.removeItem('jwtToken')
         this.$swal('กรุณา login', 'หมดเวลาการใช้งาน', 'error');
