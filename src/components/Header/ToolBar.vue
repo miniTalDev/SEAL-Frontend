@@ -184,6 +184,7 @@ export default {
         //this.nameSubject(result)
     },
     findSubjectNameById: async function(subjectId){
+      // ใช้ตัวนี้ในการนำ subjectId ไปหาชื่อวิชาแทน
       let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
       let subject = await axios.get(
           `${process.env.VUE_APP_PROGRAM_SERVICE_URL}/subject/${subjectId}`,{
@@ -193,21 +194,6 @@ export default {
           })
           this.favoriteSubject.push(subject.data.subject_name)
           console.log(subject.data.subject_name)
-          //return subject.data.subject_name
-    },
-    nameSubject: async function(result){
-      let jwtTokenLocalStorage = localStorage.getItem('jwtToken')
-      for (let i = 0; i < result.length; i++) {
-        let subject = await axios.get(
-          `${VUE_APP_PROGRAM_SERVICE_URL}/subject/${result[i].subjectId}`,{
-            headers: {
-              'Authorization': `Bearer ${jwtTokenLocalStorage}`
-            }
-          })
-          this.favoriteSubject.push(subject.data)
-      }
-      this.setFavorite(this.favoriteSubject)
-      console.log(this.favoriteSubject)
     },
     page (page) {
       this.$router.replace({ path: page })
