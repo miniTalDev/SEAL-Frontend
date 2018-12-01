@@ -175,8 +175,10 @@ export default {
     nameSubject: async function(result){
       for (let i = 0; i < result.length; i++) {
         let subject = await axios.get(
-          `${VUE_APP_PROGRAM_SERVICE_URL}/${result[i].subjectId}`)
-          this.favoriteSubject.push(subject.data)
+          `https://ngelearning.sit.kmutt.ac.th/api/v0/subject/${result[i].subjectId}`)
+        let test = {subject:result[i].id};
+        Object.assign(subject.data, test); 
+        this.favoriteSubject.push(subject.data)
       }
       this.setFavorite(this.favoriteSubject)
       console.log(this.favoriteSubject)

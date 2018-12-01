@@ -13,9 +13,16 @@
         <span class="">{{subjectName}}</span>
       </v-card-text>
   </router-link>
-  <v-btn icon>
-          <v-icon dark>favorite</v-icon>
-  </v-btn>
+    <div v-if="subjectID===getFavorite.subject_id">
+      <v-btn icon @click="disloveFavorite(getFavorite)">
+              <v-icon dark color="red">favorite</v-icon>
+      </v-btn>
+    </div>
+    <div v-else>
+      <v-btn icon @click="loveFavorite(getFavorite.subject)">
+              <v-icon dark>favorite</v-icon>
+      </v-btn>
+    </div>
     </v-card>
   </v-hover>
 </template>
@@ -37,7 +44,20 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setHeaderContent'])
+    ...mapActions(['setHeaderContent','setFavorite']),
+    loveFavorite: async function(subjectId){
+      let love = await axios.post(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/user/'+getUser.userId+'/subject',
+        {
+          "subjectId": subjectId
+        }
+      )
+    },
+    disloveFavorite: async function(Id){
+      let dislove = await axios.delete(process.env.VUE_APP_USER_SERVICE_URL + '/favorite/'+getUser.userId+'/'+Id)
+    }
+  },
+  computed: {
+    ...mapGetters(['getUser','getFavorite'])
   }
 }
 </script>
